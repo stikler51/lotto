@@ -35,7 +35,7 @@
           document.getElementById('viewport').appendChild(renderer.domElement);
 
           scene = new Physijs.Scene;
-          scene.setGravity(new THREE.Vector3(0, -800, 0));
+          scene.setGravity(new THREE.Vector3(0, -400, 0));
           scene.addEventListener(
               'update',
               function () {
@@ -49,8 +49,8 @@
               1,
               1000
           );
-          camera.position.set(0, 0, 700);
-          camera.lookAt({x: 0, y: 0, Z: 0});
+          camera.position.set(0, 20, 450);
+          camera.lookAt({x: 0, y: 20, Z: 0});
           scene.add(camera);
 
           // var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -83,61 +83,62 @@
           
           var balls = [
               [
-                  makeBall(-16, 65, 10, 1),
-                  makeBall(-16, 75, 10, 2),
-                  makeBall(-16, 85, 10, 3),
-                  makeBall(-16, 95, 10, 4),
-                  makeBall(-16, 105, 10, 5),
-                  makeBall(-16, 110, 10, 6),
-                  makeBall(-16, 120, 10, 7),
-                  makeBall(-16, 130, 10, 8),
-                  makeBall(-16, 140, 10, 9),
-                  makeBall(-16, 150, 10, 10),
+                  makeBall(-15, 160, 10, 1),
+                  makeBall(-15, 170, 10, 2),
+                  makeBall(-15, 180, 10, 3),
+                  makeBall(-15, 190, 10, 4),
+                  makeBall(-15, 200, 10, 5),
+                  makeBall(-15, 210, 10, 6),
+                  makeBall(-15, 220, 10, 7),
+                  makeBall(-15, 230, 10, 8),
+                  makeBall(-15, 240, 10, 9),
+                  makeBall(-15, 250, 10, 10),
               ],
               [
-                  makeBall(-8, 65, 10, 11),
-                  makeBall(-8, 75, 10, 12),
-                  makeBall(-8, 85, 10, 13),
-                  makeBall(-8, 95, 10, 14),
-                  makeBall(-8, 105, 10, 15),
-                  makeBall(-8, 110, 10, 16),
-                  makeBall(-8, 120, 10, 17),
-                  makeBall(-8, 130, 10, 18),
-                  makeBall(-8, 140, 10, 19),
-                  makeBall(-8, 150, 10, 20),
+                  makeBall(-5, 160, 10, 11),
+                  makeBall(-5, 170, 10, 12),
+                  makeBall(-5, 180, 10, 13),
+                  makeBall(-5, 190, 10, 14),
+                  makeBall(-5, 200, 10, 15),
+                  makeBall(-5, 210, 10, 16),
+                  makeBall(-5, 220, 10, 17),
+                  makeBall(-5, 230, 10, 18),
+                  makeBall(-5, 240, 10, 19),
+                  makeBall(-5, 250, 10, 20),
               ],
               [
-                  makeBall(8, 65, 10, 21),
-                  makeBall(8, 75, 10, 22),
-                  makeBall(8, 85, 10, 23),
-                  makeBall(8, 95, 10, 24),
-                  makeBall(8, 105, 10, 25),
-                  makeBall(8, 110, 10, 26),
-                  makeBall(8, 120, 10, 27),
-                  makeBall(8, 130, 10, 28),
-                  makeBall(8, 140, 10, 29),
-                  makeBall(8, 150, 10, 30),
+                  makeBall(5, 160, 10, 21),
+                  makeBall(5, 170, 10, 22),
+                  makeBall(5, 180, 10, 23),
+                  makeBall(5, 190, 10, 24),
+                  makeBall(5, 200, 10, 25),
+                  makeBall(5, 210, 10, 26),
+                  makeBall(5, 220, 10, 27),
+                  makeBall(5, 230, 10, 28),
+                  makeBall(5, 240, 10, 29),
+                  makeBall(5, 250, 10, 30),
               ],
               [
-                  makeBall(16, 65, 10, 31),
-                  makeBall(16, 75, 10, 32),
-                  makeBall(16, 85, 10, 33),
-                  makeBall(16, 95, 10, 34),
-                  makeBall(16, 105, 10, 35),
-                  makeBall(16, 110, 10, 36),
-                  makeBall(16, 120, 10, 37),
-                  makeBall(16, 130, 10, 38),
-                  makeBall(16, 140, 10, 39),
-                  makeBall(16, 150, 10, 40),
+                  makeBall(15, 160, 10, 31),
+                  makeBall(15, 170, 10, 32),
+                  makeBall(15, 180, 10, 33),
+                  makeBall(15, 190, 10, 34),
+                  makeBall(15, 200, 10, 35),
+                  makeBall(15, 210, 10, 36),
+                  makeBall(15, 220, 10, 37),
+                  makeBall(15, 230, 10, 38),
+                  makeBall(15, 240, 10, 39),
+                  makeBall(15, 250, 10, 40),
               ]
           ];
           
-          var stoppers = [
-              makeStopper(-16),
-              makeStopper(-5.5),
-              makeStopper(5.5),
-              makeStopper(16)
-          ];
+          
+          // var stoppers = [
+          //     makeStopper(-16),
+          //     makeStopper(-5.5),
+          //     makeStopper(5.5),
+          //     makeStopper(16)
+          // ];
           
           let frontWall = makeContainer();
           
@@ -162,6 +163,9 @@
               // frontWall.rotation.z = Math.PI;
               // console.log(frontWall.rotation.z);
               
+              balls[iteration].forEach((item => {
+                  scene.add(item);
+              }));
               
               if (iteration){
                   // console.log(iteration);
@@ -171,7 +175,7 @@
               
               // console.log(iteration);
               
-              scene.remove(stoppers[iteration]);
+              // scene.remove(stoppers[iteration]);
 
               // push 10 balls to container, start rotating
               setTimeout(() => {
@@ -189,11 +193,11 @@
 
                   let timer = setInterval(() => {
                       speed += 0.02;
-                      if (speed >= 0.22) {
+                      if (speed >= 0.12) {
                           clearInterval(timer);
                       }
                   }, 500)
-              }, 1500);
+              }, 2500);
 
               // pull winning ball, stop rotating
               setTimeout(() => {
@@ -221,20 +225,13 @@
                                       speed -= 0.05;
                                   }
                                   // console.log('auto - ', frontWall.rotation.z);
-                                  if (frontWall.rotation.z <= 0.4 && frontWall.rotation.z >= -0.4) {
+                                  if (frontWall.rotation.z <= 0.3 && frontWall.rotation.z >= -0.3) {
                                       speed = 0;
-                                      // frontWall.rotation.z = -0.51;
-                                      // switch (iteration) {
-                                      //     case 0:
-                                      //         frontWall.rotation.z = -0.51;
-                                      //         break;
-                                      //     case 1:
-                                      //         frontWall.rotation.z = -0.51;
-                                      //         break;
-                                      // }
-                                      // console.log('speed = 0 ', frontWall.rotation.z);
-                                      scene.remove(frontWall);
-                                      frontWall.rotation.z = 0;
+
+                                      frontWall.rotation.z = -0.2;
+
+                                      // scene.remove(frontWall);
+                                      // frontWall.rotation.z = 0;
                                       // scene.add(frontWall);
                                       clearInterval(timer);
                                       if (iteration < 4) {
@@ -243,9 +240,12 @@
                                           //         scene.remove(item);
                                           //     }
                                           // });
-                                          frontWall.rotation.z = 0;
+                                          // frontWall.rotation.z = 0;
                                           iteration += 1;
                                           // scene.setGravity(new THREE.Vector3(0, -800, 0));
+                                          if (iteration === 4) {
+                                              return;
+                                          }
                                           startGame();
                                       }
                                   }
@@ -667,7 +667,7 @@
                   side: THREE.DoubleSide,
               }),
               0.4,
-              0.8);
+              0.7);
 
           var smasher_material = Physijs.createMaterial(
               new THREE.MeshPhongMaterial({
@@ -703,6 +703,7 @@
               0 // mass
           );
           frontWall.position.z = 0;
+          frontWall.rotation.z = 0.1;
           // frontWall.position.x = 0;
 
           // frontWall.rotation.x = Math.PI / 2;
@@ -715,7 +716,7 @@
           backWall.position.z = 40;
 
           var rightWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(40, 50, 4),
+              new THREE.BoxGeometry(40, 100, 4),
               ground_material,
               0 // mass
           );
@@ -724,7 +725,7 @@
           rightWall.rotation.y = Math.PI / 2;
 
           var leftWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(40, 50, 4),
+              new THREE.BoxGeometry(40, 100, 4),
               ground_material,
               0 // mass
           );
@@ -893,7 +894,10 @@
           image.src = `assets/balls/${imageNum}.png`;
 
           var texture = new THREE.Texture( image );
-          image.addEventListener( 'load', function ( event ) { texture.needsUpdate = true; } );
+          image.addEventListener( 'load', function ( event ) {
+              texture.needsUpdate = true;
+              console.log('loaded');
+          } );
 
 
           var sideMaterial = Physijs.createMaterial(
@@ -904,7 +908,7 @@
                   map: texture
               }),
               0.4,
-              0.8,
+              0.6,
           );
           
           var materialArray = [];
@@ -944,7 +948,7 @@
           ball.position.z = z;
           ball.castShadow = true;
 
-          scene.add(ball);
+          // scene.add(ball);
 
           return ball;
       }
@@ -978,12 +982,12 @@
         });
 
         var body = new Physijs.BoxMesh(
-            new THREE.PlaneGeometry(112, 258, 1),
+            new THREE.PlaneGeometry(118, 263, 1),
             bodyMaterial,
             0 // mass
         );
 
-        body.position.z = -10;
+        body.position.z = -5;
         body.position.y = 17;
         body.position.x = -2;
         
