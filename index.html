@@ -7,11 +7,15 @@
   
   <link rel="stylesheet" type="text/css" href="js/physijs/examples/css/styles.css"/>
   
-  <script type="text/javascript" src="js/physijs/examples/js/three.min.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/106/three.min.js" crossorigin="anonymous"></script>-->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
+  
+  <!--<script type="text/javascript" src="js/physijs/examples/js/three.min.js"></script>-->
   <script type="text/javascript" src="js/physijs/physi.js"></script>
   <script src="js/OrbitControls.js"></script>
   <!--<script src="js/three-csg.js"></script>-->
-  <script src="./js/physijs/examples/js/three.min"></script>
+  <!--<script src="./js/physijs/examples/js/three.min"></script>-->
   
   <script type="text/javascript">
 
@@ -30,8 +34,9 @@
           renderer = new THREE.WebGLRenderer({antialias: true});
           renderer.setSize(window.innerWidth, window.innerHeight);
           renderer.setClearColor('skyblue');
-          renderer.shadowMap.enabled = true;
-          renderer.shadowMapSoft = true;
+          renderer.powerPreference = 'high-performance';
+          renderer.shadowMap.enabled = false;
+          renderer.shadowMapSoft = false;
           document.getElementById('viewport').appendChild(renderer.domElement);
 
           scene = new Physijs.Scene;
@@ -59,91 +64,145 @@
           var ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.9); // soft white light (мягкий белый свет)
           scene.add(ambientLight);
 
-          light = new THREE.DirectionalLight(0xFFFFFF);
-          light.position.set(20, 40, -15);
-          light.target.position.copy(scene.position);
-          light.castShadow = true;
-          light.shadowCameraLeft = -60;
-          light.shadowCameraTop = -60;
-          light.shadowCameraRight = 60;
-          light.shadowCameraBottom = 60;
-          light.shadowCameraNear = 20;
-          light.shadowCameraFar = 200;
-          light.shadowBias = -.0001;
-          light.shadowMapWidth = light.shadowMapHeight = 2048;
-          light.shadowDarkness = .7;
-          scene.add(light);
+          // light = new THREE.DirectionalLight(0xFFFFFF);
+          // light.position.set(20, 40, -15);
+          // light.target.position.copy(scene.position);
+          // light.castShadow = true;
+          // light.shadowCameraLeft = -60;
+          // light.shadowCameraTop = -60;
+          // light.shadowCameraRight = 60;
+          // light.shadowCameraBottom = 60;
+          // light.shadowCameraNear = 20;
+          // light.shadowCameraFar = 200;
+          // light.shadowBias = -.0001;
+          // light.shadowMapWidth = light.shadowMapHeight = 2048;
+          // light.shadowDarkness = .7;
+          // scene.add(light);
 
           // Loader
           loader = new THREE.TextureLoader();
           
-          // var balls = [makeBall(14, 0, 0), makeBall(0, 15, 0), makeBall(-14, 0, 0), makeBall(10, 15, 0),
-          // 	makeBall(20, 15, 0), makeBall(-28, 15, 0), makeBall(-42, 15, 0), makeBall(0, 30, 0), makeBall(28, 30, 0),
-          // 	makeBall(-28, 30, 0)];
-          
+          // var balls = [];
+
+
+
           var balls = [
               [
-                  makeBall(-15, 160, 10, 1),
-                  makeBall(-15, 170, 10, 2),
-                  makeBall(-15, 180, 10, 3),
-                  makeBall(-15, 190, 10, 4),
-                  makeBall(-15, 200, 10, 5),
-                  makeBall(-15, 210, 10, 6),
-                  makeBall(-15, 220, 10, 7),
-                  makeBall(-15, 230, 10, 8),
-                  makeBall(-15, 240, 10, 9),
-                  makeBall(-15, 250, 10, 10),
+                  makeBall(-14, 70, 10, 1),
+                  makeBall(-14, 80, 10, 2),
+                  makeBall(-14, 90, 10, 3),
+                  makeBall(-14, 100, 10, 4),
+                  makeBall(-14, 110, 10, 5),
+                  makeBall(-15, 120, 10, 6),
+                  makeBall(-15, 130, 10, 7),
+                  makeBall(-15, 140, 10, 8),
+                  makeBall(-15, 157, 10, 9),
+                  makeBall(-15, 160, 10, 10),
               ],
               [
-                  makeBall(-5, 160, 10, 11),
-                  makeBall(-5, 170, 10, 12),
-                  makeBall(-5, 180, 10, 13),
-                  makeBall(-5, 190, 10, 14),
-                  makeBall(-5, 200, 10, 15),
-                  makeBall(-5, 210, 10, 16),
-                  makeBall(-5, 220, 10, 17),
-                  makeBall(-5, 230, 10, 18),
-                  makeBall(-5, 240, 10, 19),
-                  makeBall(-5, 250, 10, 20),
+                  makeBall(-4, 70,  10, 11),
+                  makeBall(-4, 80,  10, 12),
+                  makeBall(-4, 90,  10, 13),
+                  makeBall(-4, 100, 10, 14),
+                  makeBall(-4, 110, 10, 15),
+                  makeBall(-5, 120, 10, 16),
+                  makeBall(-5, 130, 10, 17),
+                  makeBall(-5, 140, 10, 18),
+                  makeBall(-5, 157, 10, 19),
+                  makeBall(-5, 160, 10, 20),
               ],
               [
-                  makeBall(5, 160, 10, 21),
-                  makeBall(5, 170, 10, 22),
-                  makeBall(5, 180, 10, 23),
-                  makeBall(5, 190, 10, 24),
-                  makeBall(5, 200, 10, 25),
-                  makeBall(5, 210, 10, 26),
-                  makeBall(5, 220, 10, 27),
-                  makeBall(5, 230, 10, 28),
-                  makeBall(5, 240, 10, 29),
-                  makeBall(5, 250, 10, 30),
+                  makeBall(4, 70,  10, 21),
+                  makeBall(4, 80,  10, 22),
+                  makeBall(4, 90,  10, 23),
+                  makeBall(4, 100, 10, 24),
+                  makeBall(4, 110, 10, 25),
+                  makeBall(5, 120, 10, 26),
+                  makeBall(5, 130, 10, 27),
+                  makeBall(5, 140, 10, 28),
+                  makeBall(5, 157, 10, 29),
+                  makeBall(5, 160, 10, 30),
               ],
               [
-                  makeBall(15, 160, 10, 31),
-                  makeBall(15, 170, 10, 32),
-                  makeBall(15, 180, 10, 33),
-                  makeBall(15, 190, 10, 34),
-                  makeBall(15, 200, 10, 35),
-                  makeBall(15, 210, 10, 36),
-                  makeBall(15, 220, 10, 37),
-                  makeBall(15, 230, 10, 38),
-                  makeBall(15, 240, 10, 39),
-                  makeBall(15, 250, 10, 40),
+                  makeBall(15, 70, 10, 31),
+                  makeBall(15, 80, 10, 32),
+                  makeBall(15, 90, 10, 33),
+                  makeBall(15, 100, 10, 34),
+                  makeBall(15, 110, 10, 35),
+                  makeBall(15, 120, 10, 36),
+                  makeBall(15, 130, 10, 37),
+                  makeBall(15, 140, 10, 38),
+                  makeBall(15, 157, 10, 39),
+                  makeBall(15, 160, 10, 40),
               ]
           ];
           
+          function ballPull() {
+              return [
+                  [
+                      makeBall(-16, 160, 10, 1),
+                      makeBall(-16, 170, 10, 2),
+                      makeBall(-16, 180, 10, 3),
+                      makeBall(-16, 190, 10, 4),
+                      makeBall(-16, 200, 10, 5),
+                      makeBall(-15, 210, 10, 6),
+                      makeBall(-15, 220, 10, 7),
+                      makeBall(-15, 230, 10, 8),
+                      makeBall(-15, 240, 10, 9),
+                      makeBall(-15, 250, 10, 10),
+                  ],
+                  [
+                      makeBall(-4, 160, 10, 11),
+                      makeBall(-4, 170, 10, 12),
+                      makeBall(-4, 180, 10, 13),
+                      makeBall(-4, 190, 10, 14),
+                      makeBall(-4, 200, 10, 15),
+                      makeBall(-5, 210, 10, 16),
+                      makeBall(-5, 220, 10, 17),
+                      makeBall(-5, 230, 10, 18),
+                      makeBall(-5, 240, 10, 19),
+                      makeBall(-5, 250, 10, 20),
+                  ],
+                  [
+                      makeBall(4, 160, 10, 21),
+                      makeBall(4, 170, 10, 22),
+                      makeBall(4, 180, 10, 23),
+                      makeBall(4, 190, 10, 24),
+                      makeBall(4, 200, 10, 25),
+                      makeBall(5, 210, 10, 26),
+                      makeBall(5, 220, 10, 27),
+                      makeBall(5, 230, 10, 28),
+                      makeBall(5, 240, 10, 29),
+                      makeBall(5, 250, 10, 30),
+                  ],
+                  [
+                      makeBall(16, 160, 10, 31),
+                      makeBall(16, 170, 10, 32),
+                      makeBall(16, 180, 10, 33),
+                      makeBall(16, 190, 10, 34),
+                      makeBall(16, 200, 10, 35),
+                      makeBall(15, 210, 10, 36),
+                      makeBall(15, 220, 10, 37),
+                      makeBall(15, 230, 10, 38),
+                      makeBall(15, 240, 10, 39),
+                      makeBall(15, 250, 10, 40),
+                  ]
+              ];
+          }
+
           
-          // var stoppers = [
-          //     makeStopper(-16),
-          //     makeStopper(-5.5),
-          //     makeStopper(5.5),
-          //     makeStopper(16)
-          // ];
+          
+          
+          var stoppers = [
+              makeStopper(-15),
+              makeStopper(-5),
+              makeStopper(5),
+              makeStopper(15)
+          ];
           
           let frontWall = makeContainer();
           
           makeGlass();
-          makeStopper();
           
           let speed = 0;
 
@@ -151,43 +210,50 @@
           
           makeBallsExit();
 
+          let stopWall = makeStopWall();
+
           makeCatchingBox();
           
           var iteration = 0;
 
           var topWall = makeTopWall();
-          // frontWall.add(topWall);
-          // console.log(topWall === scene.getObjectById( 72, true ));
+
+          balls.forEach((item => {
+              item.forEach((ball => {
+                  scene.add(ball);
+              }))
+          }));
           
           function startGame() {
-              // frontWall.rotation.z = Math.PI;
-              // console.log(frontWall.rotation.z);
-              
-              balls[iteration].forEach((item => {
-                  scene.add(item);
-              }));
-              
-              if (iteration){
-                  // console.log(iteration);
-                  frontWall.remove(topWall);
-                  scene.add(frontWall);
-              }
-              
-              // console.log(iteration);
-              
-              // scene.remove(stoppers[iteration]);
 
-              // push 10 balls to container, start rotating
+              scene.add(stopWall);
+
+              frontWall.remove(topWall);
+              scene.add(frontWall);
+              
+              // if (iteration){
+              //     frontWall.remove(topWall);
+              //     scene.add(frontWall);
+              // }
+              
+              // // ----------------------------
+              // balls[iteration].forEach((item) => {
+              //     // item.material.needsUpdate = true;
+              //     item.material._physijs.restitution = 0.8;
+              // });
+              // // ----------------------------
+              //
+              // console.log(balls[0][0]);
+              scene.remove(balls[iteration][0]);
+              balls[iteration][0].position.y = 71;
+              scene.add(balls[iteration][0]);
+
+              scene.remove(stoppers[iteration]);
+
               setTimeout(() => {
                   
                   frontWall.add(topWall);
                   scene.add(frontWall);
-                  // scene.add(frontWall);
-                  // scene.add(frontWall);
-
-                  // balls.forEach((item) => {
-                  //     item.restitution = 0.8;
-                  // });
 
                   scene.setGravity(new THREE.Vector3(0, -400, 0));
 
@@ -212,8 +278,7 @@
 
                   var index = balls[iteration].indexOf(balls[iteration][winningBall]);
                   if (index !== -1) balls[iteration].splice(index, 1);
-                  // console.log(balls);
-
+  
                   setTimeout(() => {
 
                       var timerB = setInterval(() => {
@@ -221,35 +286,54 @@
                           if (balls[iteration].length === 0) {
                               clearInterval(timerB);
                               let timer = setInterval(() => {
-                                  if (speed > 0.05) {
+                                  if (speed > 0.06) {
                                       speed -= 0.05;
                                   }
-                                  // console.log('auto - ', frontWall.rotation.z);
+                                  
                                   if (frontWall.rotation.z <= 0.3 && frontWall.rotation.z >= -0.3) {
+                                      
+                                      console.log('yo');
                                       speed = 0;
 
-                                      frontWall.rotation.z = -0.2;
+                                      frontWall.rotation.z = 0;
 
-                                      // scene.remove(frontWall);
-                                      // frontWall.rotation.z = 0;
-                                      // scene.add(frontWall);
                                       clearInterval(timer);
                                       if (iteration < 4) {
-                                          // balls[iteration].forEach((item, index) => {
-                                          //     if (index !== winningBall) {
-                                          //         scene.remove(item);
-                                          //     }
-                                          // });
-                                          // frontWall.rotation.z = 0;
                                           iteration += 1;
-                                          // scene.setGravity(new THREE.Vector3(0, -800, 0));
                                           if (iteration === 4) {
-                                              return;
+                                              
+                                              setTimeout(() => {
+                                                  scene.remove(stopWall);
+                                              }, 500);
+                                              
+                                              setTimeout(() => {
+                                                  
+                                                  stoppers.forEach((item) => {
+                                                      scene.add(item);
+                                                  });
+
+                                                  // balls = balls_1.map(function(arr) {
+                                                  //     return arr.slice();
+                                                  // });
+                                                  
+                                                  balls = ballPull();
+                                                  
+                                                  balls.forEach((item => {
+                                                      item.forEach((ball => {
+                                                          scene.add(ball);
+                                                      }))
+                                                  }));
+
+                                                  iteration = 0;
+                                                  
+                                                  return;
+                                              }, 3000)
+                                              
                                           }
                                           startGame();
                                       }
                                   }
-                              }, 500);
+                              }, 200);
                           } else {
                               scene.remove(balls[iteration][0]);
                               balls[iteration][0].position.z = -20;
@@ -260,8 +344,7 @@
                                   scene.remove(balls[iteration][0]);
                                   balls[iteration].splice(0, 1);
                               }, 400);
-                              
-                              //
+
                           }
 
                       }, 500);
@@ -280,77 +363,23 @@
 
               frontWall.rotation.z += speed;
               
-              // console.log(frontWall.rotation.z);
               frontWall.__dirtyRotation = true;
-              
-              // if(removableBall) {
-              //     scene.remove(removableBall);
-              //     if (removableBall.position.z > -21 && removableBall.position.z < -19) {
-              //         removableBall.position.z = -20;
-              //         posZ = true;
-              //     } else if (removableBall.position.z < -21) {
-              //         removableBall.position.z += 1;
-              //         posZ = false;
-              //     } else if (removableBall.position.z > -19) {
-              //         removableBall.position.z -= 1;
-              //         posZ = false;
-              //     }
-              //
-              //     if (removableBall.position.x > -1 && removableBall.position.x < 1) {
-              //         removableBall.position.x = 0;
-              //         posX = true
-              //     } else if (removableBall.position.x < -1) {
-              //         removableBall.position.x += 1;
-              //         posX = false;
-              //     } else if (removableBall.position.x > 1) {
-              //         removableBall.position.x -= 1;
-              //         posX = false
-              //     }
-              //
-              //     if (removableBall.position.y > -31 && removableBall.position.y < -29) {
-              //         removableBall.position.y = -30;
-              //         posY = true;
-              //     } else if (removableBall.position.y > -29) {
-              //         removableBall.position.y -= 1;
-              //         posY = false;
-              //     } else if (removableBall.position.y < -31) {
-              //         removableBall.position.y += 1;
-              //         posY = false;
-              //     }
-              //
-              //     if (posX && posY && posZ) {
-              //         balls.splice(0, 1);
-              //         console.log(balls);
-              //         removableBall = null;
-              //         posX = false;
-              //         posY = false;
-              //         posZ = false;
-              //     } else {
-              //         scene.add(removableBall);
-              //     }
-              //
-              //
-              // }
-
-              // scene.remove(removableBall);
-              // removableBall.position.z = -20;
-              // removableBall.position.x = 0;
-              // removableBall.position.y = -30;
-              // scene.add(removableBall);
-              //
 
               renderer.render(scene, camera);
 
           };
-      requestAnimationFrame(render);
-      scene.simulate();
+
+          scene.simulate();
+          
+          requestAnimationFrame(render);
+      
       };
 
       window.onload = initScene;
       
       function makeStopper(x) {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'red',
                   opacity: 0,
                   transparent: true,
@@ -360,7 +389,7 @@
               0);
 
           var stopper = new Physijs.BoxMesh(
-              new THREE.PlaneGeometry(10, 10, 1),
+              new THREE.BoxBufferGeometry(10, 10, 1),
               ground_material,
               0, // mass
           );
@@ -377,7 +406,7 @@
       
       function makeCatchingBox() {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'black',
                   opacity: 1,
                   transparent: true,
@@ -433,7 +462,7 @@
       
       function makeBallsExit() {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'red',
                   opacity: 0,
                   transparent: true,
@@ -494,14 +523,41 @@
           
           floor.add(backWall);
           floor.add(frontWall);
-          floor.add(stopWall);
+          // floor.add(stopWall);
           
           scene.add(floor);
+      }
+      
+      function makeStopWall() {
+          var ground_material = Physijs.createMaterial(
+              new THREE.MeshBasicMaterial({
+                  color: 'orange',
+                  opacity: 0,
+                  transparent: true,
+                  side: THREE.DoubleSide,
+              }),
+              0.9,
+              0);
+
+          var stopWall = new Physijs.BoxMesh(
+              new THREE.PlaneGeometry(10, 10, 1),
+              ground_material,
+              0 // mass
+          );
+
+          stopWall.position.z = 46;
+          stopWall.position.x = -45;
+          stopWall.position.y = -62;
+          stopWall.rotation.x = Math.PI / -2;
+          stopWall.rotation.y = Math.PI / 2;
+          
+          scene.add(stopWall);
+          return stopWall;
       }
 
       function makeTubes() {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'green',
                   opacity: 0,
                   transparent: true,
@@ -511,7 +567,7 @@
               0);
 
           var frontWallTube = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(40, 110, 1),
+              new THREE.BoxBufferGeometry(40, 110, 1),
               ground_material,
               0 // mass
           );
@@ -558,8 +614,7 @@
 
           scene.add(frontWallTube);
       }
-
-
+      
       function createCylinder() {
 
           var ground_material = Physijs.createMaterial(
@@ -602,7 +657,7 @@
       
       function makeTopWall() {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'orange',
                   opacity: 0,
                   transparent: true,
@@ -612,7 +667,7 @@
               0.8);
           
           var topWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(50, 40, 4),
+              new THREE.BoxBufferGeometry(50, 40, 4),
               ground_material,
               0 // mass
           );
@@ -660,14 +715,14 @@
 
       function makeContainer() {
           var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
+              new THREE.MeshBasicMaterial({
                   color: 'green',
                   opacity: 0,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
               0.4,
-              0.7);
+              0.9);
 
           var smasher_material = Physijs.createMaterial(
               new THREE.MeshPhongMaterial({
@@ -677,10 +732,10 @@
                   // side: THREE.DoubleSide,
               }),
               0.4,
-              0.8);
+              0.9);
 
           ground = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(50, 40, 4),
+              new THREE.BoxBufferGeometry(50, 40, 4),
               ground_material,
               0 // mass
           );
@@ -698,7 +753,7 @@
           topWall.rotation.x = Math.PI / 2;
           //
           var frontWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(100, 100, 4),
+              new THREE.BoxBufferGeometry(100, 100, 4),
               ground_material,
               0 // mass
           );
@@ -709,14 +764,14 @@
           // frontWall.rotation.x = Math.PI / 2;
 
           var backWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(100, 100, 4),
+              new THREE.BoxBufferGeometry(100, 100, 4),
               ground_material,
               0 // mass
           );
           backWall.position.z = 40;
 
           var rightWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(40, 100, 4),
+              new THREE.BoxBufferGeometry(40, 60, 4),
               ground_material,
               0 // mass
           );
@@ -725,7 +780,7 @@
           rightWall.rotation.y = Math.PI / 2;
 
           var leftWall = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(40, 100, 4),
+              new THREE.BoxBufferGeometry(40, 60, 4),
               ground_material,
               0 // mass
           );
@@ -734,7 +789,7 @@
           leftWall.rotation.y = Math.PI / 2;
 
           var leftCorner = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(45, 40, 4),
+              new THREE.BoxBufferGeometry(45, 40, 4),
               ground_material,
               0 // mass
           );
@@ -746,7 +801,7 @@
           leftCorner.position.z = 20;
 
           var leftCornerTop = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(45, 40, 4),
+              new THREE.BoxBufferGeometry(45, 40, 4),
               ground_material,
               0 // mass
           );
@@ -758,7 +813,7 @@
           leftCornerTop.position.z = 20;
           //
           var rightCorner = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(45, 40, 4),
+              new THREE.BoxBufferGeometry(45, 40, 4),
               ground_material,
               0 // mass
           );
@@ -771,7 +826,7 @@
           rightCorner.position.z = 20;
 
           var rightCornerTop = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(45, 40, 4),
+              new THREE.BoxBufferGeometry(45, 40, 4),
               ground_material,
               0 // mass
           );
@@ -785,7 +840,7 @@
 
 
           var smasherBottom = new Physijs.BoxMesh(
-              new THREE.BoxGeometry(10, 10, 40),
+              new THREE.BoxBufferGeometry(10, 10, 40),
               ground_material,
               0 // mass
           );
@@ -804,7 +859,7 @@
           smasherLeft.position.x = 46;
 
           var FakeSmasherBottom = new THREE.Mesh(
-              new THREE.BoxGeometry(10, 0.5, 40, 32),
+              new THREE.BoxBufferGeometry(10, 0.5, 40, 32),
               smasher_material,
               0 // mass
           );
@@ -871,19 +926,10 @@
 
           scene.add(frontWall);
 
-          // createCylinder();
-
           return frontWall;
       }
 
       function makeBall(x, y, z, imageNum) {
-          // const loader = new THREE.TextureLoader();
-          // var geometry = new THREE.SphereGeometry(4, 32, 32);
-
-          // var material = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
-          // var texture = THREE.ImageUtils.loadTexture("assets/126.png");
-          // material.map = texture;
-
           var geometry = new THREE.BoxGeometry( 1, 1, 1, 12, 12, 12 );
           for ( var i in geometry.vertices ) {
               var vertex = geometry.vertices[ i ];
@@ -905,49 +951,26 @@
                   color: 0xffffff,
                   // specular: 0x505050,
                   // shininess: 150,
-                  map: texture
+                  map: texture,
               }),
               0.4,
               0.6,
           );
+          
           
           var materialArray = [];
 
           for (let i = 0; i < 6; i++) {
               materialArray.push(sideMaterial);
           }
-
-          // var material = new THREE.MeshFaceMaterial(materialArray);
-          //
-          // var faceVertexUvs = geometry.faceVertexUvs[ 0 ];
-          // for ( let i = 0; i < faceVertexUvs.length; i ++ ) {
-          //
-          //     var uvs = faceVertexUvs[ i ];
-          //     var face = geometry.faces[ i ];
-          //
-          //     for ( var j = 0; j < 3; j ++ ) {
-          //
-          //         uvs[ j ].x = face.vertexNormals[ j ].x * 0.5 + 0.5;
-          //         uvs[ j ].y = face.vertexNormals[ j ].y * 0.5 + 0.5;
-          //
-          //     }
-          //
-          // }
-
-
-          
-          
-          // material.wrapS = THREE.RepeatWrapping;
-
-          // material.shininess = 150;
-          // var material = new THREE.MeshFaceMaterial(materialArray);
           
           var ball = new Physijs.SphereMesh(geometry, sideMaterial, 7);
           ball.position.x = x;
           ball.position.y = y;
           ball.position.z = z;
-          ball.castShadow = true;
-
+          ball.castShadow = false;
+          
+          
           // scene.add(ball);
 
           return ball;
@@ -957,7 +980,7 @@
           winningBalls = [firstBall, secondBall, thirdBall, fourthBall]
       }
       
-    function makeGlass() {
+      function makeGlass() {
         var material = new THREE.MeshBasicMaterial({
             map: THREE.ImageUtils.loadTexture('assets/Glass.png'),
             transparent: true,
