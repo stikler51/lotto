@@ -40,7 +40,7 @@
           document.getElementById('viewport').appendChild(renderer.domElement);
 
           scene = new Physijs.Scene;
-          scene.setGravity(new THREE.Vector3(0, -400, 0));
+          scene.setGravity(new THREE.Vector3(0, -500, 0));
           scene.addEventListener(
               'update',
               function () {
@@ -88,104 +88,104 @@
 
           var balls = [
               [
-                  makeBall(-14, 70, 10, 1),
-                  makeBall(-14, 80, 10, 2),
-                  makeBall(-14, 90, 10, 3),
-                  makeBall(-14, 100, 10, 4),
-                  makeBall(-14, 110, 10, 5),
-                  makeBall(-15, 120, 10, 6),
-                  makeBall(-15, 130, 10, 7),
-                  makeBall(-15, 140, 10, 8),
-                  makeBall(-15, 157, 10, 9),
-                  makeBall(-15, 160, 10, 10),
+                  makeBall(-15, 70, 10, 0),
+                  makeBall(-15, 80, 10, 1),
+                  makeBall(-15, 90, 10, 2),
+                  makeBall(-15, 100, 10, 3),
+                  makeBall(-15, 110, 10, 4),
+                  makeBall(-15, 120, 10, 5),
+                  makeBall(-15, 130, 10, 6),
+                  makeBall(-15, 140, 10, 7),
+                  makeBall(-15, 157, 10, 8),
+                  makeBall(-15, 160, 10, 9),
               ],
               [
-                  makeBall(-4, 70,  10, 11),
-                  makeBall(-4, 80,  10, 12),
-                  makeBall(-4, 90,  10, 13),
-                  makeBall(-4, 100, 10, 14),
-                  makeBall(-4, 110, 10, 15),
-                  makeBall(-5, 120, 10, 16),
-                  makeBall(-5, 130, 10, 17),
-                  makeBall(-5, 140, 10, 18),
-                  makeBall(-5, 157, 10, 19),
-                  makeBall(-5, 160, 10, 20),
+                  makeBall(-5, 70,  10, 0),
+                  makeBall(-5, 80,  10, 1),
+                  makeBall(-5, 90,  10, 2),
+                  makeBall(-5, 100, 10, 3),
+                  makeBall(-5, 110, 10, 4),
+                  makeBall(-5, 120, 10, 5),
+                  makeBall(-5, 130, 10, 6),
+                  makeBall(-5, 140, 10, 7),
+                  makeBall(-5, 157, 10, 8),
+                  makeBall(-5, 160, 10, 9),
               ],
               [
-                  makeBall(4, 70,  10, 21),
-                  makeBall(4, 80,  10, 22),
-                  makeBall(4, 90,  10, 23),
-                  makeBall(4, 100, 10, 24),
-                  makeBall(4, 110, 10, 25),
-                  makeBall(5, 120, 10, 26),
-                  makeBall(5, 130, 10, 27),
-                  makeBall(5, 140, 10, 28),
-                  makeBall(5, 157, 10, 29),
-                  makeBall(5, 160, 10, 30),
+                  makeBall(5, 70,  10, 0),
+                  makeBall(5, 80,  10, 1),
+                  makeBall(5, 90,  10, 2),
+                  makeBall(5, 100, 10, 3),
+                  makeBall(5, 110, 10, 4),
+                  makeBall(5, 120, 10, 5),
+                  makeBall(5, 130, 10, 6),
+                  makeBall(5, 140, 10, 7),
+                  makeBall(5, 157, 10, 8),
+                  makeBall(5, 160, 10, 9),
               ],
               [
-                  makeBall(15, 70, 10, 31),
-                  makeBall(15, 80, 10, 32),
-                  makeBall(15, 90, 10, 33),
-                  makeBall(15, 100, 10, 34),
-                  makeBall(15, 110, 10, 35),
-                  makeBall(15, 120, 10, 36),
-                  makeBall(15, 130, 10, 37),
-                  makeBall(15, 140, 10, 38),
-                  makeBall(15, 157, 10, 39),
-                  makeBall(15, 160, 10, 40),
+                  makeBall(15, 70, 10, 0),
+                  makeBall(15, 80, 10, 1),
+                  makeBall(15, 90, 10, 2),
+                  makeBall(15, 100, 10, 3),
+                  makeBall(15, 110, 10, 4),
+                  makeBall(15, 120, 10, 5),
+                  makeBall(15, 130, 10, 6),
+                  makeBall(15, 140, 10, 7),
+                  makeBall(15, 157, 10, 8),
+                  makeBall(15, 160, 10, 9),
               ]
           ];
-          
+
           function ballPull() {
               return [
                   [
-                      makeBall(-16, 160, 10, 1),
-                      makeBall(-16, 170, 10, 2),
-                      makeBall(-16, 180, 10, 3),
-                      makeBall(-16, 190, 10, 4),
-                      makeBall(-16, 200, 10, 5),
-                      makeBall(-15, 210, 10, 6),
-                      makeBall(-15, 220, 10, 7),
-                      makeBall(-15, 230, 10, 8),
-                      makeBall(-15, 240, 10, 9),
-                      makeBall(-15, 250, 10, 10),
+                      makeBall(-15, 70, 10, 0),
+                      makeBall(-15, 80, 10, 1),
+                      makeBall(-15, 90, 10, 2),
+                      makeBall(-15, 100, 10, 3),
+                      makeBall(-15, 110, 10, 4),
+                      makeBall(-15, 120, 10, 5),
+                      makeBall(-15, 130, 10, 6),
+                      makeBall(-15, 140, 10, 7),
+                      makeBall(-15, 157, 10, 8),
+                      makeBall(-15, 160, 10, 9),
                   ],
                   [
-                      makeBall(-4, 160, 10, 11),
-                      makeBall(-4, 170, 10, 12),
-                      makeBall(-4, 180, 10, 13),
-                      makeBall(-4, 190, 10, 14),
-                      makeBall(-4, 200, 10, 15),
-                      makeBall(-5, 210, 10, 16),
-                      makeBall(-5, 220, 10, 17),
-                      makeBall(-5, 230, 10, 18),
-                      makeBall(-5, 240, 10, 19),
-                      makeBall(-5, 250, 10, 20),
+                      makeBall(-5, 70,  10, 0),
+                      makeBall(-5, 80,  10, 1),
+                      makeBall(-5, 90,  10, 2),
+                      makeBall(-5, 100, 10, 3),
+                      makeBall(-5, 110, 10, 4),
+                      makeBall(-5, 120, 10, 5),
+                      makeBall(-5, 130, 10, 6),
+                      makeBall(-5, 140, 10, 7),
+                      makeBall(-5, 157, 10, 8),
+                      makeBall(-5, 160, 10, 9),
                   ],
                   [
-                      makeBall(4, 160, 10, 21),
-                      makeBall(4, 170, 10, 22),
-                      makeBall(4, 180, 10, 23),
-                      makeBall(4, 190, 10, 24),
-                      makeBall(4, 200, 10, 25),
-                      makeBall(5, 210, 10, 26),
-                      makeBall(5, 220, 10, 27),
-                      makeBall(5, 230, 10, 28),
-                      makeBall(5, 240, 10, 29),
-                      makeBall(5, 250, 10, 30),
+                      makeBall(5, 70,  10, 0),
+                      makeBall(5, 80,  10, 1),
+                      makeBall(5, 90,  10, 2),
+                      makeBall(5, 100, 10, 3),
+                      makeBall(5, 110, 10, 4),
+                      makeBall(5, 120, 10, 5),
+                      makeBall(5, 130, 10, 6),
+                      makeBall(5, 140, 10, 7),
+                      makeBall(5, 157, 10, 8),
+                      makeBall(5, 160, 10, 9),
                   ],
                   [
-                      makeBall(16, 160, 10, 31),
-                      makeBall(16, 170, 10, 32),
-                      makeBall(16, 180, 10, 33),
-                      makeBall(16, 190, 10, 34),
-                      makeBall(16, 200, 10, 35),
-                      makeBall(15, 210, 10, 36),
-                      makeBall(15, 220, 10, 37),
-                      makeBall(15, 230, 10, 38),
-                      makeBall(15, 240, 10, 39),
-                      makeBall(15, 250, 10, 40),
+                      makeBall(15, 70, 10, 0),
+                      makeBall(15, 80, 10, 1),
+                      makeBall(15, 90, 10, 2),
+                      makeBall(15, 100, 10, 3),
+                      makeBall(15, 110, 10, 4),
+                      makeBall(15, 120, 10, 5),
+                      makeBall(15, 130, 10, 6),
+                      makeBall(15, 140, 10, 7),
+                      makeBall(15, 157, 10, 8),
+                      makeBall(15, 160, 10, 9),
                   ]
               ];
           }
@@ -223,6 +223,22 @@
                   scene.add(ball);
               }))
           }));
+
+          let ballNum = 0;
+          
+          let winningBallsPull = [];
+          
+          function addBallsToScene() {
+              for (let j = 0; j < 4; j++) {
+                  scene.add(balls[j][ballNum])
+              }
+          };
+          
+          function removeWinnigBalls(ball) {
+              scene.remove(ball);
+              ball.position.z = -10;
+              scene.add(ball);
+          }
           
           function startGame() {
 
@@ -231,22 +247,10 @@
               frontWall.remove(topWall);
               scene.add(frontWall);
               
-              // if (iteration){
-              //     frontWall.remove(topWall);
-              //     scene.add(frontWall);
-              // }
-              
-              // // ----------------------------
-              // balls[iteration].forEach((item) => {
-              //     // item.material.needsUpdate = true;
-              //     item.material._physijs.restitution = 0.8;
-              // });
-              // // ----------------------------
-              //
-              // console.log(balls[0][0]);
-              scene.remove(balls[iteration][0]);
-              balls[iteration][0].position.y = 71;
-              scene.add(balls[iteration][0]);
+
+              // scene.remove(balls[iteration][0]);
+              // balls[iteration][0].position.y = 71;
+              // scene.add(balls[iteration][0]);
 
               scene.remove(stoppers[iteration]);
 
@@ -276,6 +280,9 @@
                   balls[iteration][winningBall].position.x = 0;
                   scene.add(balls[iteration][winningBall]);
 
+                  winningBallsPull[iteration] = balls[iteration][winningBall];
+                  console.log(winningBallsPull);
+
                   var index = balls[iteration].indexOf(balls[iteration][winningBall]);
                   if (index !== -1) balls[iteration].splice(index, 1);
   
@@ -303,7 +310,23 @@
                                           if (iteration === 4) {
                                               
                                               setTimeout(() => {
-                                                  scene.remove(stopWall);
+                                                  
+                                                  let ballNum = 0;
+                                                  
+                                                  let removeWinBalls = setInterval(() => {
+                                                      
+                                                      removeWinnigBalls(winningBallsPull[ballNum]);
+                                                      ballNum++;
+                                                      
+                                                      if(ballNum >= 4) {
+                                                          clearInterval(removeWinBalls);
+                                                          ballNum = 0;
+                                                      }
+                                                      
+                                                  }, 500);
+                                                  
+                                                  
+                                                  // scene.remove(stopWall);
                                               }, 500);
                                               
                                               setTimeout(() => {
@@ -317,20 +340,33 @@
                                                   // });
                                                   
                                                   balls = ballPull();
-                                                  
-                                                  balls.forEach((item => {
-                                                      item.forEach((ball => {
-                                                          scene.add(ball);
-                                                      }))
-                                                  }));
+
+                                                  let int = setInterval(() => {
+                                                      addBallsToScene();
+                                                      ballNum++;
+
+                                                      if(ballNum >= 10) {
+                                                          clearInterval(int);
+                                                          ballNum = 0;
+                                                      }
+
+                                                  }, 500);
+                                                  //
+                                                  // balls.forEach((item => {
+                                                  //     item.forEach((ball => {
+                                                  //         scene.add(ball);
+                                                  //     }))
+                                                  // }));
 
                                                   iteration = 0;
                                                   
                                                   return;
                                               }, 3000)
                                               
+                                          } else {
+                                              startGame();
                                           }
-                                          startGame();
+                                         
                                       }
                                   }
                               }, 200);
@@ -416,22 +452,22 @@
               0);
 
           var floor = new Physijs.BoxMesh(
-              new THREE.PlaneGeometry(50, 50, 1),
+              new THREE.PlaneGeometry(105, 50, 1),
               ground_material,
               0, // mass
           );
           floor.position.z = -35;
           floor.rotation.x = Math.PI / 2;
-          floor.position.y = -60;
+          floor.position.y = -100;
 
           var wall = new Physijs.BoxMesh(
-              new THREE.PlaneGeometry(50, 60, 1),
+              new THREE.PlaneGeometry(105, 100, 1),
               ground_material,
               0, // mass
           );
           
           wall.position.y = -25;
-          wall.position.z = -30;
+          wall.position.z = -45;
           wall.rotation.x = Math.PI / 2;
           
           var rightWall = new Physijs.BoxMesh(
@@ -441,7 +477,8 @@
           );
 
           rightWall.rotation.y = Math.PI / 2;
-          rightWall.position.x = -25;
+          rightWall.position.x = -52;
+          rightWall.position.z = -20;
           // floor.add()
           
           var leftWall = new Physijs.BoxMesh(
@@ -451,7 +488,8 @@
           );
 
           leftWall.rotation.y = Math.PI / 2;
-          leftWall.position.x = 25;
+          leftWall.position.x = 50;
+          leftWall.position.z = -20;
           
           floor.add(rightWall);
           floor.add(leftWall);
@@ -964,7 +1002,7 @@
               materialArray.push(sideMaterial);
           }
           
-          var ball = new Physijs.SphereMesh(geometry, sideMaterial, 7);
+          var ball = new Physijs.SphereMesh(geometry, sideMaterial, 5);
           ball.position.x = x;
           ball.position.y = y;
           ball.position.z = z;
@@ -998,14 +1036,14 @@
         glass.position.y = 27;
 
         var bodyMaterial = new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture('assets/Body.png'),
+            map: THREE.ImageUtils.loadTexture('assets/Body-2.png'),
             transparent: true,
             opacity: 1,
             color: 0xFFFFFF
         });
 
         var body = new Physijs.BoxMesh(
-            new THREE.PlaneGeometry(118, 263, 1),
+            new THREE.PlaneGeometry(118, 280, 1),
             bodyMaterial,
             0 // mass
         );
