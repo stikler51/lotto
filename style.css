@@ -4,15 +4,15 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 50px;
+    top: 3.47vw;
     color: white;
     font-size: 30px;
 }
 
 .win {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 4.16vw;
+    height: 4.16vw;
 }
 
 .win img {
@@ -20,41 +20,41 @@
 }
 
 .winning-0 {
-    bottom: 77px;
+    bottom: 5.3vw;
     left: 39.2vw;
 }
 
 .winning-1 {
-    bottom: 77px;
+    bottom: 5.3vw;
     left: 45vw;
 }
 
 .winning-2 {
-    bottom: 77px;
+    bottom: 5.3vw;
     left: 50.8vw;
 }
 
 .winning-3 {
-    bottom: 77px;
+    bottom: 5.3vw;
     left: 56.6vw;
 }
 
 .score {
     position: absolute;
-    top: 124px;
-    right: 150px;
+    top: 8.6vw;
+    right: 10.4vw;
 }
 
 .score td {
-    width: 100px;
-    height: 26px;
+    width: 6.94vw;
+    height: 1.8vw;
     text-align: center;
 }
 
 .separator {
-    height: 43px;
+    height: 2.98vw;
 }
 
 .separator-2 {
-    height: 30px;
+    height: 2.08vw;
 }
