@@ -19,20 +19,15 @@
       Physijs.scripts.ammo = 'examples/js/ammo.js';
 
       var initScene, render, loader, renderer, scene, ground, camera;
-      
-      
-      
-      
-
-      // console.log(hex_md5('star99:2019-01-01:0123456789'));
-
       var texture = new THREE.TextureLoader().load( "assets/Stage.png" );
 
       initScene = async function () {
+          
 
-          let winningBalls = await getWinningBalls();
-
-          console.log(winningBalls);
+          const winningBallsAllRounds = await getWinningBalls()
+              .then(data => data);
+          
+          console.log(winningBallsAllRounds);
           
           renderer = new THREE.WebGLRenderer({antialias: true});
           renderer.setSize(window.innerWidth, window.innerHeight);
@@ -71,7 +66,6 @@
           // Loader
           loader = new THREE.TextureLoader();
           
-
           var balls = [
               [
                   makeBall(-15, 70, 10, 0),
@@ -85,42 +79,42 @@
                   makeBall(-15, 157, 10, 8),
                   makeBall(-15, 160, 10, 9),
               ],
-              // [
-              //     makeBall(-5, 70,  10, 0),
-              //     makeBall(-5, 80,  10, 1),
-              //     makeBall(-5, 90,  10, 2),
-              //     makeBall(-5, 100, 10, 3),
-              //     makeBall(-5, 110, 10, 4),
-              //     makeBall(-5, 120, 10, 5),
-              //     makeBall(-5, 130, 10, 6),
-              //     makeBall(-5, 140, 10, 7),
-              //     makeBall(-5, 157, 10, 8),
-              //     makeBall(-5, 160, 10, 9),
-              // ],
-              // [
-              //     makeBall(5, 70,  10, 0),
-              //     makeBall(5, 80,  10, 1),
-              //     makeBall(5, 90,  10, 2),
-              //     makeBall(5, 100, 10, 3),
-              //     makeBall(5, 110, 10, 4),
-              //     makeBall(5, 120, 10, 5),
-              //     makeBall(5, 130, 10, 6),
-              //     makeBall(5, 140, 10, 7),
-              //     makeBall(5, 157, 10, 8),
-              //     makeBall(5, 160, 10, 9),
-              // ],
-              // [
-              //     makeBall(15, 70, 10, 0),
-              //     makeBall(15, 80, 10, 1),
-              //     makeBall(15, 90, 10, 2),
-              //     makeBall(15, 100, 10, 3),
-              //     makeBall(15, 110, 10, 4),
-              //     makeBall(15, 120, 10, 5),
-              //     makeBall(15, 130, 10, 6),
-              //     makeBall(15, 140, 10, 7),
-              //     makeBall(15, 157, 10, 8),
-              //     makeBall(15, 160, 10, 9),
-              // ]
+              [
+                  makeBall(-5, 70,  10, 0),
+                  makeBall(-5, 80,  10, 1),
+                  makeBall(-5, 90,  10, 2),
+                  makeBall(-5, 100, 10, 3),
+                  makeBall(-5, 110, 10, 4),
+                  makeBall(-5, 120, 10, 5),
+                  makeBall(-5, 130, 10, 6),
+                  makeBall(-5, 140, 10, 7),
+                  makeBall(-5, 157, 10, 8),
+                  makeBall(-5, 160, 10, 9),
+              ],
+              [
+                  makeBall(5, 70,  10, 0),
+                  makeBall(5, 80,  10, 1),
+                  makeBall(5, 90,  10, 2),
+                  makeBall(5, 100, 10, 3),
+                  makeBall(5, 110, 10, 4),
+                  makeBall(5, 120, 10, 5),
+                  makeBall(5, 130, 10, 6),
+                  makeBall(5, 140, 10, 7),
+                  makeBall(5, 157, 10, 8),
+                  makeBall(5, 160, 10, 9),
+              ],
+              [
+                  makeBall(15, 70, 10, 0),
+                  makeBall(15, 80, 10, 1),
+                  makeBall(15, 90, 10, 2),
+                  makeBall(15, 100, 10, 3),
+                  makeBall(15, 110, 10, 4),
+                  makeBall(15, 120, 10, 5),
+                  makeBall(15, 130, 10, 6),
+                  makeBall(15, 140, 10, 7),
+                  makeBall(15, 157, 10, 8),
+                  makeBall(15, 160, 10, 9),
+              ]
           ];
 
           function ballPull() {
@@ -176,16 +170,13 @@
                   ]
               ];
           }
-
           
-          
-          //
-          // var stoppers = [
-          //     makeStopper(-15),
-          //     makeStopper(-5),
-          //     makeStopper(5),
-          //     makeStopper(15)
-          // ];
+          var stoppers = [
+              makeStopper(-15),
+              makeStopper(-5),
+              makeStopper(5),
+              makeStopper(15)
+          ];
           
           let frontWall = makeContainer();
           
@@ -193,7 +184,7 @@
           
           let speed = 0;
 
-          // makeTubes();
+          makeTubes();
           
           makeBallsExit();
 
@@ -214,9 +205,6 @@
           }));
 
           let ballNum = 0;
-
-          
-          
           let winningBallsPull = [];
           
           function addBallsToScene() {
@@ -229,28 +217,24 @@
               scene.remove(ball);
               ball.position.z = -10;
               scene.add(ball);
+              
+              setTimeout(()=> {
+                  scene.remove(ball);
+              }, 500);
           }
-          
-          
-          function startGame() {
 
+          let winningBalls = winningBallsAllRounds[round].split('');
+          
+              function startGame() {
               scene.add(stopWall);
-
               frontWall.remove(topWall);
               scene.add(frontWall);
-              
-
-              // scene.remove(balls[iteration][0]);
-              // balls[iteration][0].position.y = 71;
-              // scene.add(balls[iteration][0]);
-
               scene.remove(stoppers[iteration]);
-
+              
               setTimeout(() => {
                   
                   frontWall.add(topWall);
                   scene.add(frontWall);
-
                   scene.setGravity(new THREE.Vector3(0, -400, 0));
 
                   let timer = setInterval(() => {
@@ -263,9 +247,7 @@
 
               // pull winning ball, stop rotating
               setTimeout(() => {
-                  
                   let winningBall = winningBalls[iteration];
-
                   scene.remove(balls[iteration][winningBall]);
                   balls[iteration][winningBall].position.z = 48;
                   balls[iteration][winningBall].position.y = -50;
@@ -273,22 +255,17 @@
                   scene.add(balls[iteration][winningBall]);
 
                   winningBallsPull[iteration] = balls[iteration][winningBall];
-                  
                   let ballCont = document.body.querySelector(`.winning-${iteration}`);
-                  console.log(ballCont);
                   
                   let img = document.createElement('img');
                   img.src = `assets/balls/balls/Ball_${winningBall}.png`;
                   ballCont.appendChild(img);
-
-
+                  
                   var index = balls[iteration].indexOf(balls[iteration][winningBall]);
                   if (index !== -1) balls[iteration].splice(index, 1);
   
                   setTimeout(() => {
-
                       var timerB = setInterval(() => {
-
                           if (balls[iteration].length === 0) {
                               clearInterval(timerB);
                               let timer = setInterval(() => {
@@ -297,90 +274,58 @@
                                   }
                                   
                                   if (frontWall.rotation.z <= 0.3 && frontWall.rotation.z >= -0.3) {
-        
                                       speed = 0;
-
                                       frontWall.rotation.z = 0;
 
                                       clearInterval(timer);
                                       if (iteration < 4) {
                                           iteration += 1;
                                           if (iteration === 4) {
-                                              
                                               setTimeout(() => {
-                                                  
                                                   document.body.querySelectorAll('.win').forEach(item => {
                                                       item.innerHTML = '';
                                                   });
                                                   
                                                   let winStr = `${winningBalls[0]} ${winningBalls[1]} ${winningBalls[2]} ${winningBalls[3]}`;
-
                                                   document.body.querySelector(`.round-${round}`).innerHTML = winStr;
-                                                  
                                                   round += 1;
-                                                  
-                                                  if (round >= 23) {
+                                                  if (round > 23) {
                                                       return;
                                                   }
-                                                  
+
+                                                  winningBalls = winningBallsAllRounds[round].split('');
                                                   let ballNum = 0;
-                                                  
                                                   let removeWinBalls = setInterval(() => {
-                                                      
                                                       removeWinnigBalls(winningBallsPull[ballNum]);
                                                       ballNum++;
-                                                      
                                                       if(ballNum >= 4) {
                                                           clearInterval(removeWinBalls);
                                                           ballNum = 0;
                                                       }
-                                                      
                                                   }, 500);
-                                                  
-                                                  
-                                                  // scene.remove(stopWall);
                                               }, 500);
                                               
                                               setTimeout(() => {
-                                                  
                                                   stoppers.forEach((item) => {
                                                       scene.add(item);
                                                   });
-
-                                                  // balls = balls_1.map(function(arr) {
-                                                  //     return arr.slice();
-                                                  // });
-                                                  
-                                                  
                                                   
                                                   balls = ballPull();
 
                                                   let int = setInterval(() => {
                                                       addBallsToScene();
                                                       ballNum++;
-
                                                       if(ballNum >= 10) {
                                                           clearInterval(int);
                                                           ballNum = 0;
                                                       }
-
                                                   }, 250);
-                                                  //
-                                                  // balls.forEach((item => {
-                                                  //     item.forEach((ball => {
-                                                  //         scene.add(ball);
-                                                  //     }))
-                                                  // }));
-
                                                   iteration = 0;
-                                                  
                                                   return;
                                               }, 3000)
-                                              
                                           } else {
                                               startGame();
                                           }
-                                         
                                       }
                                   }
                               }, 200);
@@ -403,8 +348,7 @@
                   }, 500)
               }, 12000)
           };
-      
-
+          
           const startBtn = document.querySelector('.start_btn');
           startBtn.addEventListener('click', startGame);
           updateTime();
@@ -670,46 +614,6 @@
           frontWallTube.add(theMostLeftWall);
 
           scene.add(frontWallTube);
-      }
-      
-      function createCylinder() {
-
-          var ground_material = Physijs.createMaterial(
-              new THREE.MeshPhongMaterial({
-                  color: 'green',
-                  opacity: 0.1,
-                  transparent: true,
-                  side: THREE.DoubleSide,
-              }),
-              0.9,
-              0);
-
-          var extrudeSettings = {
-              amount: 40,
-              steps: 1,
-              bevelEnabled: false,
-              curveSegments: 32
-          };
-
-          var arcShape = new THREE.Shape();
-          arcShape.absarc(0, 0, 50, 0, Math.PI * 2, 40, false);
-
-          var holePath = new THREE.Path();
-          holePath.absarc(0, 0, 48, 0, Math.PI * 2, true);
-          arcShape.holes.push(holePath);
-
-
-          var geometry = new THREE.ExtrudeGeometry(arcShape, extrudeSettings);
-
-          var cylinder = new THREE.Mesh(
-              geometry,
-              ground_material,
-              0 // mass
-          );
-
-          scene.add(cylinder);
-
-          return cylinder;
       }
       
       function makeTopWall() {
@@ -990,7 +894,7 @@
           var geometry = new THREE.BoxGeometry( 1, 1, 1, 12, 12, 12 );
           for ( var i in geometry.vertices ) {
               var vertex = geometry.vertices[ i ];
-              vertex.normalize().multiplyScalar(6);
+              vertex.normalize().multiplyScalar(4);
           }
 
           var image = document.createElement( 'img' );
@@ -999,21 +903,17 @@
           var texture = new THREE.Texture( image );
           image.addEventListener( 'load', function ( event ) {
               texture.needsUpdate = true;
-              console.log('loaded');
           } );
 
 
           var sideMaterial = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 0xffffff,
-                  // specular: 0x505050,
-                  // shininess: 150,
                   map: texture,
               }),
               0.4,
               0.6,
           );
-          
           
           var materialArray = [];
 
@@ -1026,15 +926,10 @@
           ball.position.y = y;
           ball.position.z = z;
           ball.castShadow = false;
-          
-          
+ 
           // scene.add(ball);
 
           return ball;
-      }
-      
-      function setWinningBalls(firstBall, secondBall, thirdBall, fourthBall) {
-          winningBalls = [firstBall, secondBall, thirdBall, fourthBall]
       }
       
       function makeGlass() {
@@ -1076,7 +971,7 @@
     }
     
       function updateTime() {
-          // let dataContainer = document.body.querySelector('.date');
+          let dataContainer = document.body.querySelector('.date');
           let date = new Date();
           let day = date.getDate();
           let month = date.getMonth();
@@ -1099,7 +994,7 @@
               month = `0${month}`;
           }
 
-          // dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}:${minutes} ${ampm}`;
+          dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}:${minutes} ${ampm}`;
           
           return `${year}-${month}-${day}`;
       }
@@ -1112,8 +1007,7 @@
           
           let requestString = `http://smartcar.temp.domains/~lotto/api/request.php?client_id=${clientID}&date=${date}&validation=${validationHash}`;
 
-          return await fetch(requestString)
-              .then(resp => resp.json());
+          return await fetch(`https://cors-anywhere.herokuapp.com/${requestString}`).then(resp => resp.json());
       }
     
   
