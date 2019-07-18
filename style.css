@@ -45,9 +45,16 @@
     right: 10.4vw;
 }
 
-.score td {
+.score-2 {
+    position: absolute;
+    top: 8.6vw;
+    left: 9.8vw;
+}
+
+.score td,
+.score-2 td {
     width: 6.94vw;
-    height: 1.8vw;
+    height: 1.85vw;
     text-align: center;
 }
 

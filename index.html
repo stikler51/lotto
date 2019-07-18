@@ -287,7 +287,9 @@
                                                   });
                                                   
                                                   let winStr = `${winningBalls[0]} ${winningBalls[1]} ${winningBalls[2]} ${winningBalls[3]}`;
-                                                  document.body.querySelector(`.round-${round}`).innerHTML = winStr;
+                                                  document.body.querySelectorAll(`.round-${round}`).forEach(item => {
+                                                    item.innerHTML = winStr;
+                                                  });
                                                   round += 1;
                                                   if (round > 23) {
                                                       return;
@@ -1024,6 +1026,69 @@
 <div class="win winning-3"></div>
 
 <table class="score">
+  <tr>
+    <td></td>
+    <td class="round-23" data-attr="23"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="round-22" data-attr="22"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="round-21" data-attr="21"></td>
+  </tr>
+  <tr class="separator">
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="round-20" data-attr="20"></td>
+    <td class="round-19" data-attr="19"></td>
+  </tr>
+  <tr>
+    <td class="round-18" data-attr="18"></td>
+    <td class="round-17" data-attr="17"></td>
+  </tr>
+  <tr>
+    <td class="round-16" data-attr="16"></td>
+    <td class="round-15" data-attr="15"></td>
+  </tr>
+  <tr>
+    <td class="round-14" data-attr="14"></td>
+    <td class="round-13" data-attr="13"></td>
+  </tr>
+  <tr>
+    <td class="round-12" data-attr="12"></td>
+    <td class="round-11" data-attr="11"></td>
+  </tr>
+  <tr class="separator-2">
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="round-10" data-attr="10"></td>
+    <td class="round-9" data-attr="9"></td>
+  </tr>
+  <tr>
+    <td class="round-8" data-attr="8"></td>
+    <td class="round-7" data-attr="7"></td>
+  </tr>
+  <tr>
+    <td class="round-6" data-attr="6"></td>
+    <td class="round-5" data-attr="5"></td>
+  </tr>
+  <tr>
+    <td class="round-4" data-attr="4"></td>
+    <td class="round-3" data-attr="3"></td>
+  </tr>
+  <tr>
+    <td class="round-2" data-attr="2"></td>
+    <td class="round-1" data-attr="1"></td>
+  </tr>
+</table>
+
+<table class="score-2">
   <tr>
     <td></td>
     <td class="round-23" data-attr="23"></td>
