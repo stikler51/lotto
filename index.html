@@ -426,6 +426,23 @@
           const startBtn = document.querySelector('.start_btn');
           startBtn.addEventListener('click', startGame);
           
+          const fullscreenBtn = document.querySelector('.fullscreen_btn');
+          const canvas = document.querySelector('.container');
+
+          fullscreenBtn.addEventListener('click', () => {
+              canvas.requestFullscreen();
+          });
+
+          window.addEventListener("keyup", function(event) {
+              // Number 13 is the "Enter" key on the keyboard
+              if (event.keyCode === 13) {
+                  // Cancel the default action, if needed
+                  event.preventDefault();
+                  // Trigger the button element with a click
+                  document.querySelector('.start_btn').click();
+              }
+          });
+          
           // Обновление времени на табло вверху каждые 10 сек
           updateTime();
           setInterval(() => {
@@ -1108,136 +1125,139 @@
 </head>
 
 <body>
+<button class="start_btn" style="position: absolute; top: 10px; left: 10px;">Start</button>
+<button class="fullscreen_btn" style="position: absolute; top: 30px; left: 10px;">full</button>
+
 <div class="container">
-  <div id="viewport"></div>
-  <button class="start_btn" style="position: absolute; top: 10px; left: 10px;">Start</button>
-  <div class="date"></div>
-  <div class="win winning-0"></div>
-  <div class="win winning-1"></div>
-  <div class="win winning-2"></div>
-  <div class="win winning-3"></div>
+  <div id="viewport">
+    <div class="date"></div>
+    <div class="win winning-0"></div>
+    <div class="win winning-1"></div>
+    <div class="win winning-2"></div>
+    <div class="win winning-3"></div>
   
-  <table class="score">
-    <tr>
-      <td></td>
-      <td class="round-1"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="round-2"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="round-3"></td>
-    </tr>
-    <tr class="separator">
-
-    </tr>
-    <tr>
-      <td class="round-4"></td>
-      <td class="round-5"></td>
-    </tr>
-    <tr>
-      <td class="round-6"></td>
-      <td class="round-7"></td>
-    </tr>
-    <tr>
-      <td class="round-8"></td>
-      <td class="round-9"></td>
-    </tr>
-    <tr>
-      <td class="round-10"></td>
-      <td class="round-11"></td>
-    </tr>
-    <tr>
-      <td class="round-12"></td>
-      <td class="round-13"></td>
-    </tr>
-    <tr class="separator-2">
-
-    </tr>
-    <tr>
-      <td class="round-14"></td>
-      <td class="round-15"></td>
-    </tr>
-    <tr>
-      <td class="round-16"></td>
-      <td class="round-17"></td>
-    </tr>
-    <tr>
-      <td class="round-18"></td>
-      <td class="round-19"></td>
-    </tr>
-    <tr>
-      <td class="round-20"></td>
-      <td class="round-21"></td>
-    </tr>
-    <tr>
-      <td class="round-22"></td>
-      <td class="round-23"></td>
-    </tr>
-  </table>
+    <table class="score">
+      <tr>
+        <td></td>
+        <td class="round-1"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="round-2"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="round-3"></td>
+      </tr>
+      <tr class="separator">
+    
+      </tr>
+      <tr>
+        <td class="round-4"></td>
+        <td class="round-5"></td>
+      </tr>
+      <tr>
+        <td class="round-6"></td>
+        <td class="round-7"></td>
+      </tr>
+      <tr>
+        <td class="round-8"></td>
+        <td class="round-9"></td>
+      </tr>
+      <tr>
+        <td class="round-10"></td>
+        <td class="round-11"></td>
+      </tr>
+      <tr>
+        <td class="round-12"></td>
+        <td class="round-13"></td>
+      </tr>
+      <tr class="separator-2">
+    
+      </tr>
+      <tr>
+        <td class="round-14"></td>
+        <td class="round-15"></td>
+      </tr>
+      <tr>
+        <td class="round-16"></td>
+        <td class="round-17"></td>
+      </tr>
+      <tr>
+        <td class="round-18"></td>
+        <td class="round-19"></td>
+      </tr>
+      <tr>
+        <td class="round-20"></td>
+        <td class="round-21"></td>
+      </tr>
+      <tr>
+        <td class="round-22"></td>
+        <td class="round-23"></td>
+      </tr>
+    </table>
   
-  <table class="score-2">
-    <tr>
-      <td></td>
-      <td class="round-1"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="round-2"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="round-3"></td>
-    </tr>
-    <tr class="separator">
-  
-    </tr>
-    <tr>
-      <td class="round-4"></td>
-      <td class="round-5"></td>
-    </tr>
-    <tr>
-      <td class="round-6"></td>
-      <td class="round-7"></td>
-    </tr>
-    <tr>
-      <td class="round-8"></td>
-      <td class="round-9"></td>
-    </tr>
-    <tr>
-      <td class="round-10"></td>
-      <td class="round-11"></td>
-    </tr>
-    <tr>
-      <td class="round-12"></td>
-      <td class="round-13"></td>
-    </tr>
-    <tr class="separator-2">
-  
-    </tr>
-    <tr>
-      <td class="round-14"></td>
-      <td class="round-15"></td>
-    </tr>
-    <tr>
-      <td class="round-16"></td>
-      <td class="round-17"></td>
-    </tr>
-    <tr>
-      <td class="round-18"></td>
-      <td class="round-19"></td>
-    </tr>
-    <tr>
-      <td class="round-20"></td>
-      <td class="round-21"></td>
-    </tr>
-    <tr>
-      <td class="round-22"></td>
-      <td class="round-23"></td>
-    </tr>
-  </table>
+    <table class="score-2">
+      <tr>
+        <td></td>
+        <td class="round-1"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="round-2"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="round-3"></td>
+      </tr>
+      <tr class="separator">
+    
+      </tr>
+      <tr>
+        <td class="round-4"></td>
+        <td class="round-5"></td>
+      </tr>
+      <tr>
+        <td class="round-6"></td>
+        <td class="round-7"></td>
+      </tr>
+      <tr>
+        <td class="round-8"></td>
+        <td class="round-9"></td>
+      </tr>
+      <tr>
+        <td class="round-10"></td>
+        <td class="round-11"></td>
+      </tr>
+      <tr>
+        <td class="round-12"></td>
+        <td class="round-13"></td>
+      </tr>
+      <tr class="separator-2">
+    
+      </tr>
+      <tr>
+        <td class="round-14"></td>
+        <td class="round-15"></td>
+      </tr>
+      <tr>
+        <td class="round-16"></td>
+        <td class="round-17"></td>
+      </tr>
+      <tr>
+        <td class="round-18"></td>
+        <td class="round-19"></td>
+      </tr>
+      <tr>
+        <td class="round-20"></td>
+        <td class="round-21"></td>
+      </tr>
+      <tr>
+        <td class="round-22"></td>
+        <td class="round-23"></td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 </body>

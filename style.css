@@ -7,7 +7,14 @@ body {
 }
 
 .container {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#viewport {
+    position: relative!important;
 }
 
 .date {
