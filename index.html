@@ -37,14 +37,14 @@
           
           // Размер канваса, в котором рендерится сцена
           renderer.setSize(1366, 768);
-          renderer.setClearColor('skyblue');
+          renderer.setClearColor('black');
           renderer.powerPreference = 'high-performance';
           renderer.shadowMap.enabled = false;
           renderer.shadowMapSoft = false;
           document.getElementById('viewport').appendChild(renderer.domElement);
           
           scene = new Physijs.Scene;
-          scene.background = 'skyblue';
+          scene.background = 'black';
           
           // Гравитация на сцене. -500 - значение по оси Y. Чем меньше значение - тем сильнее гравитация. 
           // Значение подобрано оптимальное. Его изменение может вызывать проскакивание шаров сквозь барабан при падении
@@ -237,6 +237,29 @@
                   scene.add(ball);
               }))
           }));
+
+          
+          // Вставка видео
+          let vid = document.createElement('video');
+          vid.src = 'output.webm';
+          
+          //запуск видео через 5 сек после загрузки игры, чтобы все успело прогрузиться
+          vid.addEventListener('canplaythrough', () => {
+              setTimeout(() => {
+                  document.getElementById('viewport').appendChild(vid);
+                  
+                  setTimeout(() => {
+                      vid.play();
+                  }, 500);
+                 
+              }, 5000);
+          });
+
+          // удаление видео после окончания его воспроизведения
+          vid.addEventListener('ended', () => {
+              vid.remove();
+              startGame();
+          });
           
           // Функция добавления шаров на сцену
           function addBallsToScene() {
@@ -396,7 +419,11 @@
                                                   }, 250);
                                                   // обнуляется счетчик итераций для нового раунда
                                                   iteration = 0;
-                                                  return;
+                                                  
+                                                  // через 4 сек запускается новый раунд
+                                                  setTimeout(() => {
+                                                      startGame();
+                                                  }, 4000);
                                               }, 3000)
                                           } else {
                                               // Начало игры с новой итерацией, если iteration < 4
@@ -423,8 +450,8 @@
           };
           
           // Запуск раунда по нажатию кнопки Start
-          const startBtn = document.querySelector('.start_btn');
-          startBtn.addEventListener('click', startGame);
+          // const startBtn = document.querySelector('.start_btn');
+          // startBtn.addEventListener('click', startGame);
           
           const fullscreenBtn = document.querySelector('.fullscreen_btn');
           const canvas = document.querySelector('.container');
@@ -433,15 +460,15 @@
               canvas.requestFullscreen();
           });
 
-          window.addEventListener("keyup", function(event) {
-              // Number 13 is the "Enter" key on the keyboard
-              if (event.keyCode === 13) {
-                  // Cancel the default action, if needed
-                  event.preventDefault();
-                  // Trigger the button element with a click
-                  document.querySelector('.start_btn').click();
-              }
-          });
+          // window.addEventListener("keyup", function(event) {
+          //     // Number 13 is the "Enter" key on the keyboard
+          //     if (event.keyCode === 13) {
+          //         // Cancel the default action, if needed
+          //         event.preventDefault();
+          //         // Trigger the button element with a click
+          //         document.querySelector('.start_btn').click();
+          //     }
+          // });
           
           // Обновление времени на табло вверху каждые 10 сек
           updateTime();
@@ -1125,7 +1152,7 @@
 </head>
 
 <body>
-<button class="start_btn" style="position: absolute; top: 10px; left: 10px;">Start</button>
+<!--<button class="start_btn" style="position: absolute; top: 10px; left: 10px;">Start</button>-->
 <button class="fullscreen_btn" style="position: absolute; top: 30px; left: 10px;">full</button>
 
 <div class="container">
@@ -1257,6 +1284,7 @@
         <td class="round-23"></td>
       </tr>
     </table>
+    
   </div>
 </div>
 

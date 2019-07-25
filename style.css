@@ -89,3 +89,11 @@ body {
 .separator-2 {
     height: 31px;
 }
+
+video {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 400px;
+    width: 300px;
+}
