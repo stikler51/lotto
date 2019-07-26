@@ -244,10 +244,16 @@
                   scene.add(balls[j][ballNum])
               }
           };
+          
+          // выбор рандомного видео
+          // 30 - верхний предел выборки случайного числа. Это число нужно будет изменить на общее количество видео
+          var rand = Math.floor(1 + Math.random() * 30);
 
           // Вставка видео
           let vid = document.createElement('video');
-          vid.src = 'output.webm';
+          vid.src = 'video/output.webm';
+
+          // vid.src = `video/output-${rand}.webm`;
 
           // Функция удаления выигрышных шаров со сцены. Если их не удалять, то к раунду 10, компу становится больно
           function removeWinnigBalls(ball) {

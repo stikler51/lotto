@@ -93,7 +93,7 @@ body {
 video {
     position: absolute;
     left: 0;
-    bottom: 0;
-    height: 400px;
-    width: 300px;
+    bottom: 3px;
+    /*height: 400px;*/
+    /*width: 300px;*/
 }
