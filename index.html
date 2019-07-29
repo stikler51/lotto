@@ -36,7 +36,7 @@
           renderer = new THREE.WebGLRenderer({antialias: true});
           
           // Размер канваса, в котором рендерится сцена
-          renderer.setSize(1366, 768);
+          renderer.setSize(1600, 900);
           renderer.setClearColor('black');
           renderer.powerPreference = 'high-performance';
           renderer.shadowMap.enabled = false;
@@ -59,7 +59,7 @@
           // Установка позиции камеры
           camera = new THREE.PerspectiveCamera(
               35,
-              1366 / 768,
+              1600 / 900,
               1,
               1000
           );
