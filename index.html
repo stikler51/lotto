@@ -59,7 +59,7 @@
           // Установка позиции камеры
           camera = new THREE.PerspectiveCamera(
               35,
-              2560 / 1440,
+              2560 / 1440, // Должно совпадать с размером канваса
               1,
               1000
           );
@@ -247,11 +247,11 @@
           
           // выбор рандомного видео
           // 30 - верхний предел выборки случайного числа. Это число нужно будет изменить на общее количество видео
-          var rand = Math.floor(1 + Math.random() * 30);
+          // var rand = Math.floor(1 + Math.random() * 30);
 
           // Вставка видео
-          let vid = document.createElement('video');
-          vid.src = 'video/output.webm';
+          // let vid = document.createElement('video');
+          // vid.src = 'video/output.webm';
 
           // vid.src = `video/output-${rand}.webm`;
 
@@ -440,17 +440,18 @@
           const startBtn = document.querySelector('.start_btn');
           
           startBtn.addEventListener('click', () => {
-              //запуск видео через 5 сек после загрузки игры, чтобы все успело прогрузиться
-                      document.getElementById('viewport').appendChild(vid);
-                      setTimeout(() => {
-                          document.body.querySelector('video').play();
-                      }, 1000);
-              
-              // удаление видео после окончания его воспроизведения
-              vid.addEventListener('ended', () => {
-                  vid.remove();
-                  startGame();
-              });
+              startGame();
+              // //запуск видео через 5 сек после загрузки игры, чтобы все успело прогрузиться
+              //         document.getElementById('viewport').appendChild(vid);
+              //         setTimeout(() => {
+              //             document.body.querySelector('video').play();
+              //         }, 1000);
+              //
+              // // удаление видео после окончания его воспроизведения
+              // vid.addEventListener('ended', () => {
+              //     vid.remove();
+              //     startGame();
+              // });
           });
           
           const fullscreenBtn = document.querySelector('.fullscreen_btn');
