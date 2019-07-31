@@ -6,6 +6,10 @@ body {
     align-items: center;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -80,7 +84,8 @@ body {
     height: 60px;
     text-align: center;
     border: 1px solid transparent;
-    font-size: 32px;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 .separator {

@@ -477,6 +477,11 @@
               updateTime();
           }, 10000);
 
+          setInterval(() => {
+              let dots = document.body.querySelector('.dots');
+              dots.classList.toggle('hidden');
+          }, 1000);
+
           // главная функция, без которой three js не работает.
           render = function () {
               requestAnimationFrame(render);
@@ -1092,7 +1097,7 @@
               month = `0${month}`;
           }
 
-          dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}:${minutes} ${ampm}`;
+          dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}<span class='dots'>:</span>${minutes} ${ampm}`;
           
           return `${year}-${month}-${day}`;
       }
