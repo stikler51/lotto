@@ -86,6 +86,11 @@ body {
     border: 1px solid transparent;
     font-size: 36px;
     font-weight: bold;
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -ms-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+    transition: opacity 0.25s;
 }
 
 .separator {

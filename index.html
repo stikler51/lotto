@@ -37,6 +37,7 @@
           
           // Размер канваса, в котором рендерится сцена
           renderer.setSize(2560, 1440);
+          // renderer.setSize(1366, 768);
           renderer.setClearColor('black');
           renderer.powerPreference = 'high-performance';
           renderer.shadowMap.enabled = false;
@@ -60,6 +61,7 @@
           camera = new THREE.PerspectiveCamera(
               35,
               2560 / 1440, // Должно совпадать с размером канваса
+              // 1366 / 768,
               1,
               1000
           );
@@ -278,6 +280,14 @@
               // Удаляется стоппер из трубки, чтобы шары могли упасть
               scene.remove(stoppers[iteration]);
 
+              let rollMusic = document.body.querySelector('.ball_roll');
+              let dropMusic = document.body.querySelector('.ball_drop');
+              rollMusic.load();
+              dropMusic.load();
+
+              setTimeout(() => {
+                  rollMusic.play();
+              }, 1000);
               // через 2,5 сек снова добавляется верхняя часть барабана
               setTimeout(() => {
                   container.add(topWall);
@@ -292,7 +302,7 @@
                       if (speed >= 0.12) {
                           clearInterval(timer);
                       }
-                  }, 500)
+                  }, 500);
               }, 2500);
 
               // через 12 секунд после начала раунда выпадает выигрышшный шар
@@ -306,6 +316,7 @@
                   balls[iteration][winningBall].position.y = -50;
                   balls[iteration][winningBall].position.x = 0;
                   scene.add(balls[iteration][winningBall]);
+                  dropMusic.play();
 
                   // выигрышный шар сохраняется в отдельном массиве, чтобы потом была возможность его удадить
                   winningBallsPull[iteration] = balls[iteration][winningBall];
@@ -365,7 +376,9 @@
                                                   document.body.querySelectorAll(`.round-${round}`).forEach(item => {
                                                     item.innerHTML = winStr;
                                                   });
-                                                  
+
+                                                  blink(round);
+
                                                   // изменяется счетчик раундов
                                                   round -= 1;
                                                   if (round < 1) {
@@ -433,7 +446,7 @@
                           }
                       }, 500);
                   }, 500)
-              }, 12000)
+              }, 17000)
           };
           
           // Запуск раунда по нажатию кнопки Start
@@ -1035,7 +1048,7 @@
           // Передняя часть автомата со стеклом (барабан и трубки)
           // Находится в пространстве перед всеми остальными объектами
         var material = new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture('assets/GlassNew.png'),
+            map: THREE.ImageUtils.loadTexture('assets/Logo.png'),
             transparent: true,
             opacity: 1,
             color: 0xFFFFFF
@@ -1052,7 +1065,7 @@
 
         // все то же самое, но это тело (черная часть позади всех объектов)
         var bodyMaterial = new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture('assets/BodyNew2.png'),
+            map: THREE.ImageUtils.loadTexture('assets/Body.png'),
             transparent: true,
             opacity: 1,
             color: 0xFFFFFF
@@ -1153,11 +1166,38 @@
               });
           }
       }
-    
+
+      function blink(r) {
+          setTimeout(() => {
+              document.body.querySelectorAll(`.round-${r}`).forEach(item => {
+                  item.style.opacity = '0';
+              });
+              setTimeout(() => {
+                  document.body.querySelectorAll(`.round-${r}`).forEach(item => {
+                      item.style.opacity = '1';
+                  });
+                  setTimeout(() => {
+                      document.body.querySelectorAll(`.round-${r}`).forEach(item => {
+                          item.style.opacity = '0';
+                      });
+                      setTimeout(() => {
+                          document.body.querySelectorAll(`.round-${r}`).forEach(item => {
+                              item.style.opacity = '1';
+                          });
+                      }, 500);
+                  }, 500);
+              }, 500);
+          }, 500);
+      }
   </script>
 </head>
 
 <body>
+
+<embed src="audio/music.mp3" autostart="true" hidden="true" loop="true"> </embed>
+<audio class="ball_drop" src="audio/ball_drop.mp3"></audio>
+<audio class="ball_roll" src="audio/ball_roll.mp3"></audio>
+
 <button class="start_btn" style="position: absolute; top: 10px; left: 10px; z-index: 10">Start</button>
 
 <button class="fullscreen_btn" style="position: absolute; top: 40px; left: 10px; z-index: 10">full</button>
