@@ -267,6 +267,13 @@
                   scene.remove(ball);
               }, 500);
           };
+
+          let timeouts = [
+              2500, // время, через которое начинает вращаться барабан после НАЧАЛА падения шаров
+              17500, // время, через которое выпадает выигрышный шар после НАЧАЛА падения шаров
+              3000, // время, через которое в трубках появляются новые шары после НАЧАЛА удаления выигрышных шаров
+              4000, // время, через которое начинается новый раунд после НАЧАЛА добавления новых шаров в трубки
+          ];
           
           // Главная функция, где прописана вся логика и тайминги игры
           function startGame() {
@@ -279,15 +286,15 @@
               scene.add(container);
               // Удаляется стоппер из трубки, чтобы шары могли упасть
               scene.remove(stoppers[iteration]);
-
-              let rollMusic = document.body.querySelector('.ball_roll');
-              let dropMusic = document.body.querySelector('.ball_drop');
-              rollMusic.load();
-              dropMusic.load();
-
-              setTimeout(() => {
-                  rollMusic.play();
-              }, 1000);
+              //
+              // let rollMusic = document.body.querySelector('.ball_roll');
+              // let dropMusic = document.body.querySelector('.ball_drop');
+              // rollMusic.load();
+              // dropMusic.load();
+              //
+              // setTimeout(() => {
+              //     rollMusic.play();
+              // }, 1000);
               // через 2,5 сек снова добавляется верхняя часть барабана
               setTimeout(() => {
                   container.add(topWall);
@@ -303,7 +310,7 @@
                           clearInterval(timer);
                       }
                   }, 500);
-              }, 2500);
+              }, timeouts[0]);
 
               // через 12 секунд после начала раунда выпадает выигрышшный шар
               setTimeout(() => {
@@ -316,7 +323,7 @@
                   balls[iteration][winningBall].position.y = -50;
                   balls[iteration][winningBall].position.x = 0;
                   scene.add(balls[iteration][winningBall]);
-                  dropMusic.play();
+                  // dropMusic.play();
 
                   // выигрышный шар сохраняется в отдельном массиве, чтобы потом была возможность его удадить
                   winningBallsPull[iteration] = balls[iteration][winningBall];
@@ -423,8 +430,8 @@
                                                   // через 4 сек запускается новый раунд
                                                   setTimeout(() => {
                                                       startGame();
-                                                  }, 4000);
-                                              }, 3000)
+                                                  }, timeouts[3]);
+                                              }, timeouts[2])
                                           } else {
                                               // Начало игры с новой итерацией, если iteration < 4
                                               startGame();
@@ -446,7 +453,7 @@
                           }
                       }, 500);
                   }, 500)
-              }, 17000)
+              }, timeouts[1])
           };
           
           // Запуск раунда по нажатию кнопки Start
@@ -1194,9 +1201,9 @@
 
 <body>
 
-<embed src="audio/music.mp3" autostart="true" hidden="true" loop="true"> </embed>
-<audio class="ball_drop" src="audio/ball_drop.mp3"></audio>
-<audio class="ball_roll" src="audio/ball_roll.mp3"></audio>
+<!--<embed src="audio/music.mp3" autostart="true" hidden="true" loop="true"> </embed>-->
+<!--<audio class="ball_drop" src="audio/ball_drop.mp3"></audio>-->
+<!--<audio class="ball_roll" src="audio/ball_roll.mp3"></audio>-->
 
 <button class="start_btn" style="position: absolute; top: 10px; left: 10px; z-index: 10">Start</button>
 
