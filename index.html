@@ -86,110 +86,210 @@
           loader = new THREE.TextureLoader();
           
           // Массив с шарами, которые создаются при первом запуске
+          // var balls = [
+          //     [
+          //         makeBall(-15, 70, 10, 0),
+          //         makeBall(-15, 80, 10, 1),
+          //         makeBall(-15, 90, 10, 2),
+          //         makeBall(-15, 100, 10, 3),
+          //         makeBall(-15, 110, 10, 4),
+          //         makeBall(-15, 120, 10, 5),
+          //         makeBall(-15, 130, 10, 6),
+          //         makeBall(-15, 140, 10, 7),
+          //         makeBall(-15, 150, 10, 8),
+          //         makeBall(-15, 160, 10, 9),
+          //     ],
+          //     [
+          //         makeBall(-5, 70,  10, 0),
+          //         makeBall(-5, 80,  10, 1),
+          //         makeBall(-5, 90,  10, 2),
+          //         makeBall(-5, 100, 10, 3),
+          //         makeBall(-5, 110, 10, 4),
+          //         makeBall(-5, 120, 10, 5),
+          //         makeBall(-5, 130, 10, 6),
+          //         makeBall(-5, 140, 10, 7),
+          //         makeBall(-5, 150, 10, 8),
+          //         makeBall(-5, 160, 10, 9),
+          //     ],
+          //     [
+          //         makeBall(5, 70,  10, 0),
+          //         makeBall(5, 80,  10, 1),
+          //         makeBall(5, 90,  10, 2),
+          //         makeBall(5, 100, 10, 3),
+          //         makeBall(5, 110, 10, 4),
+          //         makeBall(5, 120, 10, 5),
+          //         makeBall(5, 130, 10, 6),
+          //         makeBall(5, 140, 10, 7),
+          //         makeBall(5, 150, 10, 8),
+          //         makeBall(5, 160, 10, 9),
+          //     ],
+          //     [
+          //         makeBall(15, 70, 10, 0),
+          //         makeBall(15, 80, 10, 1),
+          //         makeBall(15, 90, 10, 2),
+          //         makeBall(15, 100, 10, 3),
+          //         makeBall(15, 110, 10, 4),
+          //         makeBall(15, 120, 10, 5),
+          //         makeBall(15, 130, 10, 6),
+          //         makeBall(15, 140, 10, 7),
+          //         makeBall(15, 150, 10, 8),
+          //         makeBall(15, 160, 10, 9),
+          //     ]
+          // ];
           var balls = [
               [
-                  makeBall(-15, 70, 10, 0),
-                  makeBall(-15, 80, 10, 1),
-                  makeBall(-15, 90, 10, 2),
-                  makeBall(-15, 100, 10, 3),
-                  makeBall(-15, 110, 10, 4),
-                  makeBall(-15, 120, 10, 5),
-                  makeBall(-15, 130, 10, 6),
-                  makeBall(-15, 140, 10, 7),
-                  makeBall(-15, 157, 10, 8),
-                  makeBall(-15, 160, 10, 9),
+                  makeBall(-15, 62, 10, 0),
+                  makeBall(-15, 70, 10, 1),
+                  makeBall(-15, 79, 10, 2),
+                  makeBall(-15, 88, 10, 3),
+                  makeBall(-15, 97, 10, 4),
+                  makeBall(-15, 106, 10, 5),
+                  makeBall(-15, 112, 10, 6),
+                  makeBall(-15, 120, 10, 7),
+                  makeBall(-15, 128, 10, 8),
+                  makeBall(-15, 136, 10, 9),
               ],
               [
-                  makeBall(-5, 70,  10, 0),
-                  makeBall(-5, 80,  10, 1),
-                  makeBall(-5, 90,  10, 2),
-                  makeBall(-5, 100, 10, 3),
-                  makeBall(-5, 110, 10, 4),
-                  makeBall(-5, 120, 10, 5),
-                  makeBall(-5, 130, 10, 6),
-                  makeBall(-5, 140, 10, 7),
-                  makeBall(-5, 157, 10, 8),
-                  makeBall(-5, 160, 10, 9),
+                  makeBall(-5, 62,  10, 0),
+                  makeBall(-5, 70,  10, 1),
+                  makeBall(-5, 79,  10, 2),
+                  makeBall(-5, 88, 10, 3),
+                  makeBall(-5, 97, 10, 4),
+                  makeBall(-5, 106, 10, 5),
+                  makeBall(-5, 112, 10, 6),
+                  makeBall(-5, 120, 10, 7),
+                  makeBall(-5, 128, 10, 8),
+                  makeBall(-5, 136, 10, 9),
               ],
               [
-                  makeBall(5, 70,  10, 0),
-                  makeBall(5, 80,  10, 1),
-                  makeBall(5, 90,  10, 2),
-                  makeBall(5, 100, 10, 3),
-                  makeBall(5, 110, 10, 4),
-                  makeBall(5, 120, 10, 5),
-                  makeBall(5, 130, 10, 6),
-                  makeBall(5, 140, 10, 7),
-                  makeBall(5, 157, 10, 8),
-                  makeBall(5, 160, 10, 9),
+                  makeBall(5, 62,  10, 0),
+                  makeBall(5, 70,  10, 1),
+                  makeBall(5, 79,  10, 2),
+                  makeBall(5, 88, 10, 3),
+                  makeBall(5, 97, 10, 4),
+                  makeBall(5, 106, 10, 5),
+                  makeBall(5, 112, 10, 6),
+                  makeBall(5, 120, 10, 7),
+                  makeBall(5, 128, 10, 8),
+                  makeBall(5, 136, 10, 9),
               ],
               [
-                  makeBall(15, 70, 10, 0),
-                  makeBall(15, 80, 10, 1),
-                  makeBall(15, 90, 10, 2),
-                  makeBall(15, 100, 10, 3),
-                  makeBall(15, 110, 10, 4),
-                  makeBall(15, 120, 10, 5),
-                  makeBall(15, 130, 10, 6),
-                  makeBall(15, 140, 10, 7),
-                  makeBall(15, 157, 10, 8),
-                  makeBall(15, 160, 10, 9),
+                  makeBall(15, 62, 10, 0),
+                  makeBall(15, 70, 10, 1),
+                  makeBall(15, 79, 10, 2),
+                  makeBall(15, 88, 10, 3),
+                  makeBall(15, 97, 10, 4),
+                  makeBall(15, 106, 10, 5),
+                  makeBall(15, 112, 10, 6),
+                  makeBall(15, 120, 10, 7),
+                  makeBall(15, 128, 10, 8),
+                  makeBall(15, 136, 10, 9),
               ]
           ];
-          
+
           // Функция, которая заменят шары при каждом новом раунде
           function ballPull() {
               return [
                   [
-                      makeBall(-15, 137, 10, 0),
-                      makeBall(-15, 137, 10, 1),
-                      makeBall(-15, 137, 10, 2),
-                      makeBall(-15, 137, 10, 3),
-                      makeBall(-15, 137, 10, 4),
-                      makeBall(-15, 137, 10, 5),
-                      makeBall(-15, 137, 10, 6),
-                      makeBall(-15, 137, 10, 7),
-                      makeBall(-15, 137, 10, 8),
-                      makeBall(-15, 137, 10, 9)
+                      makeBall(-15, 62, 10, 0),
+                      makeBall(-15, 70, 10, 1),
+                      makeBall(-15, 79, 10, 2),
+                      makeBall(-15, 88, 10, 3),
+                      makeBall(-15, 97, 10, 4),
+                      makeBall(-15, 106, 10, 5),
+                      makeBall(-15, 112, 10, 6),
+                      makeBall(-15, 120, 10, 7),
+                      makeBall(-15, 128, 10, 8),
+                      makeBall(-15, 136, 10, 9),
                   ],
                   [
-                      makeBall(-5, 137, 10, 0),
-                      makeBall(-5, 137, 10, 1),
-                      makeBall(-5, 137, 10, 2),
-                      makeBall(-5, 137, 10, 3),
-                      makeBall(-5, 137, 10, 4),
-                      makeBall(-5, 137, 10, 5),
-                      makeBall(-5, 137, 10, 6),
-                      makeBall(-5, 137, 10, 7),
-                      makeBall(-5, 137, 10, 8),
-                      makeBall(-5, 137, 10, 9)
+                      makeBall(-5, 62,  10, 0),
+                      makeBall(-5, 70,  10, 1),
+                      makeBall(-5, 79,  10, 2),
+                      makeBall(-5, 88, 10, 3),
+                      makeBall(-5, 97, 10, 4),
+                      makeBall(-5, 106, 10, 5),
+                      makeBall(-5, 112, 10, 6),
+                      makeBall(-5, 120, 10, 7),
+                      makeBall(-5, 128, 10, 8),
+                      makeBall(-5, 136, 10, 9),
                   ],
                   [
-                      makeBall(5, 137, 10, 0),
-                      makeBall(5, 137, 10, 1),
-                      makeBall(5, 137, 10, 2),
-                      makeBall(5, 137, 10, 3),
-                      makeBall(5, 137, 10, 4),
-                      makeBall(5, 137, 10, 5),
-                      makeBall(5, 137, 10, 6),
-                      makeBall(5, 137, 10, 7),
-                      makeBall(5, 137, 10, 8),
-                      makeBall(5, 137, 10, 9)
+                      makeBall(5, 62,  10, 0),
+                      makeBall(5, 70,  10, 1),
+                      makeBall(5, 79,  10, 2),
+                      makeBall(5, 88, 10, 3),
+                      makeBall(5, 97, 10, 4),
+                      makeBall(5, 106, 10, 5),
+                      makeBall(5, 112, 10, 6),
+                      makeBall(5, 120, 10, 7),
+                      makeBall(5, 128, 10, 8),
+                      makeBall(5, 136, 10, 9),
                   ],
                   [
-                      makeBall(15, 137, 10, 0),
-                      makeBall(15, 137, 10, 1),
-                      makeBall(15, 137, 10, 2),
-                      makeBall(15, 137, 10, 3),
-                      makeBall(15, 137, 10, 4),
-                      makeBall(15, 137, 10, 5),
-                      makeBall(15, 137, 10, 6),
-                      makeBall(15, 137, 10, 7),
-                      makeBall(15, 137, 10, 8),
-                      makeBall(15, 137, 10, 9)
-
+                      makeBall(15, 62, 10, 0),
+                      makeBall(15, 70, 10, 1),
+                      makeBall(15, 79, 10, 2),
+                      makeBall(15, 88, 10, 3),
+                      makeBall(15, 97, 10, 4),
+                      makeBall(15, 106, 10, 5),
+                      makeBall(15, 112, 10, 6),
+                      makeBall(15, 120, 10, 7),
+                      makeBall(15, 128, 10, 8),
+                      makeBall(15, 136, 10, 9),
                   ]
               ];
+              // return [
+              //     [
+              //         makeBall(-15, 137, 10, 0),
+              //         makeBall(-15, 137, 10, 1),
+              //         makeBall(-15, 137, 10, 2),
+              //         makeBall(-15, 137, 10, 3),
+              //         makeBall(-15, 137, 10, 4),
+              //         makeBall(-15, 137, 10, 5),
+              //         makeBall(-15, 137, 10, 6),
+              //         makeBall(-15, 137, 10, 7),
+              //         makeBall(-15, 137, 10, 8),
+              //         makeBall(-15, 137, 10, 9)
+              //     ],
+              //     [
+              //         makeBall(-5, 137, 10, 0),
+              //         makeBall(-5, 137, 10, 1),
+              //         makeBall(-5, 137, 10, 2),
+              //         makeBall(-5, 137, 10, 3),
+              //         makeBall(-5, 137, 10, 4),
+              //         makeBall(-5, 137, 10, 5),
+              //         makeBall(-5, 137, 10, 6),
+              //         makeBall(-5, 137, 10, 7),
+              //         makeBall(-5, 137, 10, 8),
+              //         makeBall(-5, 137, 10, 9)
+              //     ],
+              //     [
+              //         makeBall(5, 137, 10, 0),
+              //         makeBall(5, 137, 10, 1),
+              //         makeBall(5, 137, 10, 2),
+              //         makeBall(5, 137, 10, 3),
+              //         makeBall(5, 137, 10, 4),
+              //         makeBall(5, 137, 10, 5),
+              //         makeBall(5, 137, 10, 6),
+              //         makeBall(5, 137, 10, 7),
+              //         makeBall(5, 137, 10, 8),
+              //         makeBall(5, 137, 10, 9)
+              //     ],
+              //     [
+              //         makeBall(15, 137, 10, 0),
+              //         makeBall(15, 137, 10, 1),
+              //         makeBall(15, 137, 10, 2),
+              //         makeBall(15, 137, 10, 3),
+              //         makeBall(15, 137, 10, 4),
+              //         makeBall(15, 137, 10, 5),
+              //         makeBall(15, 137, 10, 6),
+              //         makeBall(15, 137, 10, 7),
+              //         makeBall(15, 137, 10, 8),
+              //         makeBall(15, 137, 10, 9)
+              //
+              //     ]
+              // ];
           }
           
           // Массив с перегородками, которые не дают падать шарам в трубах
@@ -199,6 +299,55 @@
               makeStopper(5),
               makeStopper(15)
           ];
+
+          let stopBalls = [
+              [
+                  makeStoppersBalls(-15, 66),
+                  makeStoppersBalls(-15, 74),
+                  makeStoppersBalls(-15, 82),
+                  makeStoppersBalls(-15, 90),
+                  makeStoppersBalls(-15, 98),
+                  makeStoppersBalls(-15, 106),
+                  makeStoppersBalls(-15, 114),
+                  makeStoppersBalls(-15, 122),
+                  makeStoppersBalls(-15, 130),
+              ],
+              [
+                  makeStoppersBalls(-5, 66),
+                  makeStoppersBalls(-5, 74),
+                  makeStoppersBalls(-5, 82),
+                  makeStoppersBalls(-5, 90),
+                  makeStoppersBalls(-5, 98),
+                  makeStoppersBalls(-5, 106),
+                  makeStoppersBalls(-5, 114),
+                  makeStoppersBalls(-5, 122),
+                  makeStoppersBalls(-5, 130),
+              ],
+              [
+                  makeStoppersBalls(5, 66),
+                  makeStoppersBalls(5, 74),
+                  makeStoppersBalls(5, 82),
+                  makeStoppersBalls(5, 90),
+                  makeStoppersBalls(5, 98),
+                  makeStoppersBalls(5, 106),
+                  makeStoppersBalls(5, 114),
+                  makeStoppersBalls(5, 122),
+                  makeStoppersBalls(5, 130),
+              ],
+              [
+                  makeStoppersBalls(15, 66),
+                  makeStoppersBalls(15, 74),
+                  makeStoppersBalls(15, 82),
+                  makeStoppersBalls(15, 90),
+                  makeStoppersBalls(15, 98),
+                  makeStoppersBalls(15, 106),
+                  makeStoppersBalls(15, 114),
+                  makeStoppersBalls(15, 122),
+                  makeStoppersBalls(15, 130),
+              ]
+          ];
+
+
           
           // Вращающийся барабан
           let container = makeContainer();
@@ -285,7 +434,19 @@
               // Обновление сцены с удаленной верхней частью барабана
               scene.add(container);
               // Удаляется стоппер из трубки, чтобы шары могли упасть
+              stopBalls[iteration].forEach((item) => {
+                  scene.remove(item);
+              });
+
               scene.remove(stoppers[iteration]);
+
+              scene.remove(balls[iteration][0]);
+
+              balls[iteration][0].position.y = 63;
+
+              scene.add(balls[iteration][0]);
+
+
               //
               // let rollMusic = document.body.querySelector('.ball_roll');
               // let dropMusic = document.body.querySelector('.ball_drop');
@@ -412,6 +573,12 @@
                                                   // На сцену добавляются стопперы в трубки, чтобы шары не падали в барабан
                                                   stoppers.forEach((item) => {
                                                       scene.add(item);
+                                                  });
+
+                                                  stopBalls.forEach((item) => {
+                                                      item.forEach((it) => {
+                                                          scene.add(it);
+                                                      });
                                                   });
                                                   
                                                   // В трубки добавляются новые шары каждые 0.25сек
@@ -554,13 +721,44 @@
           
           // Настройки положения в пространстве
           stopper.rotation.x = Math.PI / 2;
-          stopper.position.y = 58;
+          stopper.position.y = 57;
           stopper.position.z = 10;
           stopper.position.x = x;
           
           // Так объект рендерится. Если не добавить его на сцену, он просто не отобразится
           scene.add(stopper);
           
+          return stopper;
+      }
+
+      function makeStoppersBalls(x, y) {
+          // Конструктор материала
+          var ground_material = Physijs.createMaterial(
+              new THREE.MeshBasicMaterial({
+                  color: 'red', // цвет
+                  opacity: 0, // прозрачность. меняется от 0 до 1. можно установить 0.5, чтобы увидеть где находится объект
+                  transparent: true, // разрешает использовать прозрачность
+                  side: THREE.DoubleSide, // объект будет виден со всех сторон. По умолчанию он виден только с одной стороны
+              }),
+              0.9, // Коэфициент трения. Эти параметры важны для взаимодействия шаров с барабаном.
+              0); // Коэфициент упругости
+
+          // Конструктор самого объекта. Грубо говоря, задает геометрия и объединяется с материалом
+          var stopper = new Physijs.BoxMesh(
+              new THREE.PlaneGeometry(10, 10),
+              ground_material,
+              0, // mass
+          );
+
+          // Настройки положения в пространстве
+          stopper.rotation.x = Math.PI / 2;
+          stopper.position.y = y;
+          stopper.position.z = 10;
+          stopper.position.x = x;
+
+          // Так объект рендерится. Если не добавить его на сцену, он просто не отобразится
+          scene.add(stopper);
+
           return stopper;
       }
       
