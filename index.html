@@ -533,6 +533,19 @@
                                           iteration += 1;
                                           if (iteration === 4) {
                                               // Если итерация = 4, значит раунд завершен
+                                              // изменяется счетчик раундов
+
+                                              if (round === 1) {
+                                                  // все заканчивается, когда счетчик раундов доходит до 0
+                                                  let winStr = `${winningBalls[0]} ${winningBalls[1]} ${winningBalls[2]} ${winningBalls[3]}`;
+                                                  document.body.querySelectorAll(`.round-${round}`).forEach(item => {
+                                                      item.innerHTML = winStr;
+                                                  });
+
+                                                  blink(round);
+                                                  return;
+                                              }
+
                                               setTimeout(() => {
                                                   // через 0,5сек удаляются картинки с выигрышными шарами внизу сцены
                                                   document.body.querySelectorAll('.win').forEach(item => {
@@ -547,12 +560,7 @@
 
                                                   blink(round);
 
-                                                  // изменяется счетчик раундов
                                                   round -= 1;
-                                                  if (round < 1) {
-                                                      // все заканчивается, когда счетчик раундов доходит до 0
-                                                      return;
-                                                  }
 
                                                   // Удаляются выигршыне шары со сцены каждые 0,5сек
                                                   winningBalls = winningBallsAllRounds[round].split('');
