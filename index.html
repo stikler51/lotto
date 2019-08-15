@@ -26,8 +26,11 @@
       initScene = async function () {
           
           // Делаем запрос к апи, сохраняем ответ в виде объекта в winningBallsAllRounds
-          winningBallsAllRounds = await getWinningBalls()
-              .then(data => data);
+          // winningBallsAllRounds = await getWinningBalls()
+          //     .then(data => data);
+
+          winningBallsAllRounds = {"client_id":"star99","date":"2019-01-01","time":"20:00:00","1":"4951","2":"5986","3":"6790","4":"6131","5":"4875","6":"6028","7":"5481","8":"8311","9":"0996","10":"3411","11":"7152","12":"4337","13":"1675","14":"8487","15":"2014","16":"9454","17":"9594","18":"6287","19":"9923","20":"1071","21":"9120","22":"2231","23":"7986","validation":"75c04161e3872c88303b343b91124949"}
+
           // Для проверки выводим этот объект в консоль
           console.log(winningBallsAllRounds);
           
@@ -423,7 +426,9 @@
               3000, // время, через которое в трубках появляются новые шары после НАЧАЛА удаления выигрышных шаров
               4000, // время, через которое начинается новый раунд после НАЧАЛА добавления новых шаров в трубки
           ];
-          
+
+          let additioanlWalls = [makeAdditionalWalls(50), makeAdditionalWalls(-50)];
+
           // Главная функция, где прописана вся логика и тайминги игры
           function startGame() {
               // Сохраняем в массив выигрышные шары конкретного раунда
@@ -436,6 +441,11 @@
               // Удаляется стоппер из трубки, чтобы шары могли упасть
               stopBalls[iteration].forEach((item) => {
                   scene.remove(item);
+              });
+
+              // добавляются дополнительные стенки,чтобы шары не улетали
+              additioanlWalls.forEach((item) => {
+                  scene.add(item);
               });
 
               scene.remove(stoppers[iteration]);
@@ -460,6 +470,10 @@
               setTimeout(() => {
                   container.add(topWall);
                   scene.add(container);
+
+                  additioanlWalls.forEach((item) => {
+                      scene.remove(item);
+                  });
                   
                   // корректируется гравитация.
                   scene.setGravity(new THREE.Vector3(0, -400, 0));
@@ -653,6 +667,7 @@
           const canvas = document.querySelector('.container');
 
           fullscreenBtn.addEventListener('click', () => {
+              document.body.querySelector('.start_btn').style.opacity = 0;
               canvas.requestFullscreen();
           });
 
@@ -898,6 +913,39 @@
           scene.add(floor);
       }
 
+      function makeAdditionalWalls(x) {
+          var ground_material = Physijs.createMaterial(
+              new THREE.MeshBasicMaterial({
+                  color: 'red',
+                  opacity: 1,
+                  transparent: true,
+                  side: THREE.DoubleSide,
+              }),
+              0.9,
+              0);
+
+          var rightWall = new Physijs.BoxMesh(
+              new THREE.BoxBufferGeometry(40, 60, 4),
+              ground_material,
+              0 // mass
+          );
+          rightWall.position.x = x;
+          rightWall.position.z = 20;
+          rightWall.position.y = 50;
+          rightWall.rotation.y = Math.PI / 2;
+
+          return rightWall;
+
+          // var leftWall = new Physijs.BoxMesh(
+          //     new THREE.BoxBufferGeometry(40, 60, 4),
+          //     ground_material,
+          //     0 // mass
+          // );
+          // leftWall.position.x = -50;
+          // leftWall.position.z = 80;
+          // leftWall.rotation.y = Math.PI / 2;
+      }
+
       // Трубки сверху, в которых лежат шары
       function makeTubes() {
           var ground_material = Physijs.createMaterial(
@@ -1017,7 +1065,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'green',
-                  opacity: 0,
+                  opacity: 0.6,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1411,10 +1459,11 @@
 <!--<audio class="ball_drop" src="audio/ball_drop.mp3"></audio>-->
 <!--<audio class="ball_roll" src="audio/ball_roll.mp3"></audio>-->
 
-<button class="start_btn" style="position: absolute; top: 10px; left: 10px; z-index: 10">Start</button>
+<!--<button class="start_btn" style="position: absolute; top: 10px; left: 10px; z-index: 10">Start</button>-->
 
 <button class="fullscreen_btn" style="position: absolute; top: 40px; left: 10px; z-index: 10">full</button>
 <div class="container">
+  <button class="start_btn" style="position: absolute; top: 10px; left: 10px; z-index: 10">Start</button>
   <div id="viewport">
     <div class="date"></div>
     <div class="win winning-0"></div>
