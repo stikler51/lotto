@@ -682,11 +682,13 @@
           // });
           
           // Обновление времени на табло вверху каждые 10 сек
-          updateTime();
-          setInterval(() => {
-              updateTime();
-          }, 10000);
 
+        setDateAndTime(winningBallsAllRounds);
+          // updateTime();
+          // setInterval(() => {
+          //     updateTime();
+          // }, 10000);
+          //
           setInterval(() => {
               let dots = document.body.querySelector('.dots');
               dots.classList.toggle('hidden');
@@ -1347,22 +1349,47 @@
     }
     
     // Функция обновляет время на табло сверху. Вызывается каждые 10 сек (интервал задается в initScene)
+
+      function setDateAndTime(resp) {
+        let gameDate = resp.date;
+        let temp = gameDate.split('-');
+        let dataContainer = document.body.querySelector('.date');
+
+        let gameTime = resp.time;
+        let tempTime = gameTime.split(':');
+
+        var ampm = +tempTime[0] >= 12 ? 'PM' : 'AM';
+
+        let outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${tempTime[1]} ${ampm}`;
+        dataContainer.innerHTML = outputDate;
+
+        let minutes = +tempTime[1];
+
+        setInterval(() => {
+          minutes++ ;
+          minutes = minutes < 10 ? '0'+minutes : minutes;
+
+          outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${minutes} ${ampm}`;
+          dataContainer.innerHTML = outputDate;
+        }, 133300)
+      }
+
       function updateTime() {
-          let dataContainer = document.body.querySelector('.date');
+          // let dataContainer = document.body.querySelector('.date');
           let date = new Date();
           let day = date.getDate();
           let month = date.getMonth() + 1;
           let year = date.getFullYear();
-          
-          let hours = date.getHours();
-          let minutes = date.getMinutes();
+          //
+          // let hours = date.getHours();
+          // let minutes = date.getMinutes();
 
-          var ampm = hours >= 12 ? 'PM' : 'AM';
-          hours = hours % 12;
-          hours = hours ? hours : 12; // the hour '0' should be '12'
-          minutes = minutes < 10 ? '0'+minutes : minutes;
-          
-          
+          // var ampm = hours >= 12 ? 'PM' : 'AM';
+          // hours = hours % 12;
+          // hours = hours ? hours : 12; // the hour '0' should be '12'
+          // minutes = minutes < 10 ? '0'+minutes : minutes;
+
+
           if (day < 10) {
               day = `0${day}`;
           }
@@ -1371,8 +1398,8 @@
               month = `0${month}`;
           }
 
-          dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}<span class='dots'>:</span>${minutes} ${ampm}`;
-          
+          // dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}<span class='dots'>:</span>${minutes} ${ampm}`;
+
           return `${year}-${month}-${day}`;
       }
       
