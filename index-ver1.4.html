@@ -1405,16 +1405,20 @@
 
       function setDateAndTime(resp) {
         let gameDate = resp.date;
+        console.log('gameDate', gameDate);
         let temp = gameDate.split('-');
         let dataContainer = document.body.querySelector('.date');
 
         let gameTime = resp.time;
+        console.log('gameTime',gameTime);
         let tempTime = gameTime.split(':');
 
         var ampm = +tempTime[0] >= 12 ? 'PM' : 'AM';
 
         let outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${tempTime[1]} ${ampm}`;
         dataContainer.innerHTML = outputDate;
+
+        console.log('date', outputDate);
 
         let minutes = +tempTime[1];
 
