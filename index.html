@@ -429,6 +429,12 @@
 
           let additioanlWalls = [makeAdditionalWalls(50), makeAdditionalWalls(-50)];
 
+          let smashers = [
+            makeSmashers(0, -46, 20),
+            makeSmashers(-46, 0, 20),
+            makeSmashers(46, 0, 20)
+          ];
+
           // Главная функция, где прописана вся логика и тайминги игры
           function startGame() {
               // Сохраняем в массив выигрышные шары конкретного раунда
@@ -485,6 +491,15 @@
                           clearInterval(timer);
                       }
                   }, 500);
+
+
+                setTimeout(() => {
+                  smashers.forEach((item) => {
+                    container.add(item);
+                    scene.add(container);
+                  });
+                }, 1000);
+
               }, timeouts[0]);
 
               // через 12 секунд после начала раунда выпадает выигрышшный шар
@@ -623,6 +638,9 @@
                                               }, timeouts[2])
                                           } else {
                                               // Начало игры с новой итерацией, если iteration < 4
+                                            smashers.forEach((item) => {
+                                              container.remove(item);
+                                            });
                                               startGame();
                                           }
                                       }
@@ -682,11 +700,13 @@
           // });
           
           // Обновление времени на табло вверху каждые 10 сек
-          updateTime();
-          setInterval(() => {
-              updateTime();
-          }, 10000);
 
+        setDateAndTime(winningBallsAllRounds);
+          // updateTime();
+          // setInterval(() => {
+          //     updateTime();
+          // }, 10000);
+          //
           setInterval(() => {
               let dots = document.body.querySelector('.dots');
               dots.classList.toggle('hidden');
@@ -1060,6 +1080,41 @@
           return topWall;
       }
 
+      function makeSmashers(x, y ,z) {
+        var ground_material = Physijs.createMaterial(
+                new THREE.MeshBasicMaterial({
+                  color: 'green',
+                  opacity: 0,
+                  transparent: true,
+                  side: THREE.DoubleSide,
+                }),
+                0.4,
+                0.9);
+
+        var smasherBottom = new Physijs.BoxMesh(
+                new THREE.BoxBufferGeometry(10, 10, 40),
+                ground_material,
+                0 // mass
+        );
+
+        smasherBottom.position.z = z;
+        smasherBottom.position.y = y;
+        smasherBottom.position.x = x;
+
+        return smasherBottom;
+
+        // smasherBottom.position.z = 20;
+        // smasherBottom.position.y = -46;
+        //
+        //
+        // var smasherLeft = smasherBottom.clone();
+        // smasherLeft.position.x = -46;
+        // smasherLeft.position.y = 0;
+        //
+        // var smasherRight = smasherLeft.clone();
+        // smasherLeft.position.x = 46;
+      }
+
       // Барабан
       function makeContainer() {
           var ground_material = Physijs.createMaterial(
@@ -1175,24 +1230,24 @@
           rightCornerTop.position.y = 35;
           rightCornerTop.position.z = 20;
           
-          var smasherBottom = new Physijs.BoxMesh(
-              new THREE.BoxBufferGeometry(10, 10, 40),
-              ground_material,
-              0 // mass
-          );
-
-          smasherBottom.position.z = 20;
-          smasherBottom.position.y = -46;
-
-          var smasherTop = smasherBottom.clone();
-          smasherTop.position.y = 46;
-
-          var smasherLeft = smasherBottom.clone();
-          smasherLeft.position.x = -46;
-          smasherLeft.position.y = 0;
-
-          var smasherRight = smasherLeft.clone();
-          smasherLeft.position.x = 46;
+          // var smasherBottom = new Physijs.BoxMesh(
+          //     new THREE.BoxBufferGeometry(10, 10, 40),
+          //     ground_material,
+          //     0 // mass
+          // );
+          //
+          // smasherBottom.position.z = 20;
+          // smasherBottom.position.y = -46;
+          //
+          // var smasherTop = smasherBottom.clone();
+          // smasherTop.position.y = 46;
+          //
+          // var smasherLeft = smasherBottom.clone();
+          // smasherLeft.position.x = -46;
+          // smasherLeft.position.y = 0;
+          //
+          // var smasherRight = smasherLeft.clone();
+          // smasherLeft.position.x = 46;
 
           var FakeSmasherBottom = new THREE.Mesh(
               new THREE.BoxBufferGeometry(10, 0.5, 40, 32),
@@ -1244,9 +1299,9 @@
           frontWall.add(leftWall);
           frontWall.add(leftCorner);
           frontWall.add(rightCorner);
-          frontWall.add(smasherBottom);
-          frontWall.add(smasherLeft);
-          frontWall.add(smasherRight);
+          // frontWall.add(smasherBottom);
+          // frontWall.add(smasherLeft);
+          // frontWall.add(smasherRight);
           frontWall.add(mainAxe);
           frontWall.add(centerAxe);
           frontWall.add(FakeSmasherBottom);
@@ -1347,22 +1402,54 @@
     }
     
     // Функция обновляет время на табло сверху. Вызывается каждые 10 сек (интервал задается в initScene)
+
+      function setDateAndTime(resp) {
+        let gameDate = resp.date;
+        console.log('gameDate', gameDate);
+        let temp = gameDate.split('-');
+        let dataContainer = document.body.querySelector('.date');
+
+        let gameTime = resp.time;
+        console.log('gameTime',gameTime);
+        let tempTime = gameTime.split(':');
+
+        var ampm = +tempTime[0] >= 12 ? 'PM' : 'AM';
+
+        let outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${tempTime[1]} ${ampm}`;
+        dataContainer.innerHTML = outputDate;
+
+        console.log('date', outputDate);
+
+        let minutes = +tempTime[1];
+
+        setTimeout(() => {
+          setInterval(() => {
+            minutes++ ;
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+
+            outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${minutes} ${ampm}`;
+            dataContainer.innerHTML = outputDate;
+          }, 210000)
+        }, 19000)
+
+      }
+
       function updateTime() {
-          let dataContainer = document.body.querySelector('.date');
+          // let dataContainer = document.body.querySelector('.date');
           let date = new Date();
           let day = date.getDate();
           let month = date.getMonth() + 1;
           let year = date.getFullYear();
-          
-          let hours = date.getHours();
-          let minutes = date.getMinutes();
+          //
+          // let hours = date.getHours();
+          // let minutes = date.getMinutes();
 
-          var ampm = hours >= 12 ? 'PM' : 'AM';
-          hours = hours % 12;
-          hours = hours ? hours : 12; // the hour '0' should be '12'
-          minutes = minutes < 10 ? '0'+minutes : minutes;
-          
-          
+          // var ampm = hours >= 12 ? 'PM' : 'AM';
+          // hours = hours % 12;
+          // hours = hours ? hours : 12; // the hour '0' should be '12'
+          // minutes = minutes < 10 ? '0'+minutes : minutes;
+
+
           if (day < 10) {
               day = `0${day}`;
           }
@@ -1371,8 +1458,8 @@
               month = `0${month}`;
           }
 
-          dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}<span class='dots'>:</span>${minutes} ${ampm}`;
-          
+          // dataContainer.innerHTML =`${day}-${month}-${year}   ${hours}<span class='dots'>:</span>${minutes} ${ampm}`;
+
           return `${year}-${month}-${day}`;
       }
       
