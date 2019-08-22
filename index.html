@@ -33,6 +33,19 @@
 
           // Для проверки выводим этот объект в консоль
           console.log(winningBallsAllRounds);
+          let dd = winningBallsAllRounds.date;
+          console.log(dd);
+
+        // var x = new XMLHttpRequest();
+        // x.open("GET", `https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`, true);
+        // x.onload = function (){
+        //   alert( x.responseText);
+        // };
+        // x.send(null);
+
+        await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`);
+
+          // await fetch(`http://95.217.73.101/?date=${dd}`);
           
           
           //Здесь стандартные процедуры для инициализации three.js 
