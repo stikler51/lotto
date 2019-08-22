@@ -451,7 +451,11 @@
               4000, // время, через которое начинается новый раунд после НАЧАЛА добавления новых шаров в трубки
           ];
 
-          let additioanlWalls = [makeAdditionalWalls(50), makeAdditionalWalls(-50)];
+          let additioanlWalls = [makeAdditionalWalls(45, -1), makeAdditionalWalls(-45, 1)];
+
+        additioanlWalls.forEach((item) => {
+          scene.add(item);
+        });
 
           let smashers = [
             makeSmashers(0, -46, 20),
@@ -957,11 +961,11 @@
           scene.add(floor);
       }
 
-      function makeAdditionalWalls(x) {
+      function makeAdditionalWalls(x, i) {
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'red',
-                  opacity: 0,
+                  opacity: 1,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -969,14 +973,15 @@
               0);
 
           var rightWall = new Physijs.BoxMesh(
-              new THREE.BoxBufferGeometry(40, 60, 4),
+              new THREE.BoxBufferGeometry(60, 4, 40),
               ground_material,
               0 // mass
           );
           rightWall.position.x = x;
           rightWall.position.z = 20;
-          rightWall.position.y = 50;
-          rightWall.rotation.y = Math.PI / 2;
+          rightWall.position.y = 10;
+          // rightWall.rotation.y = Math.PI / 2;
+          rightWall.rotation.z = Math.PI / 4 * i;
 
           return rightWall;
 
@@ -1144,7 +1149,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'green',
-                  opacity: 0,
+                  opacity: 0.5,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1449,7 +1454,7 @@
 
             outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${minutes} ${ampm}`;
             dataContainer.innerHTML = outputDate;
-          }, 92000)
+          }, 93500)
         }, 19000)
 
       }
