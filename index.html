@@ -458,7 +458,7 @@
         });
 
           let smashers = [
-            makeSmashers(0, -46, 20),
+            // makeSmashers(0, -46, 20),
             makeSmashers(-46, 0, 20),
             makeSmashers(46, 0, 20)
           ];
@@ -1259,14 +1259,14 @@
           rightCornerTop.position.y = 35;
           rightCornerTop.position.z = 20;
           
-          // var smasherBottom = new Physijs.BoxMesh(
-          //     new THREE.BoxBufferGeometry(10, 10, 40),
-          //     ground_material,
-          //     0 // mass
-          // );
-          //
-          // smasherBottom.position.z = 20;
-          // smasherBottom.position.y = -46;
+          var smasherBottom = new Physijs.BoxMesh(
+              new THREE.BoxBufferGeometry(10, 10, 40),
+              ground_material,
+              0 // mass
+          );
+
+          smasherBottom.position.z = 20;
+          smasherBottom.position.y = -46;
           //
           // var smasherTop = smasherBottom.clone();
           // smasherTop.position.y = 46;
@@ -1328,7 +1328,7 @@
           frontWall.add(leftWall);
           frontWall.add(leftCorner);
           frontWall.add(rightCorner);
-          // frontWall.add(smasherBottom);
+          frontWall.add(smasherBottom);
           // frontWall.add(smasherLeft);
           // frontWall.add(smasherRight);
           frontWall.add(mainAxe);
