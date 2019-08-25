@@ -4,27 +4,27 @@
 
 <head>
   <title>Star99</title>
-  
+
   <link rel="stylesheet" type="text/css" href="js/physijs/examples/css/styles.css"/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
   <script type="text/javascript" src="js/physijs/physi.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script src="js/md5.js"></script>
-  
+
   <script type="text/javascript">
       Physijs.scripts.worker = 'js/physijs/physijs_worker.js';
       Physijs.scripts.ammo = 'examples/js/ammo.js';
 
       var initScene, render, loader, renderer, scene, ground, camera;
-      
+
       // Здесь хранится номер раунда. Нумерация идет с конца, т.к. апи выдает результаты в обратном порядке
-      let round = 23; 
+      let round = 23;
       let winningBallsAllRounds;
 
       initScene = async function () {
-          
+
           // Делаем запрос к апи, сохраняем ответ в виде объекта в winningBallsAllRounds
           winningBallsAllRounds = await getWinningBalls()
               .then(data => data);
@@ -57,11 +57,11 @@
         await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`);
 
           // await fetch(`http://95.217.73.101/?date=${dd}`);
-          
-          
-          //Здесь стандартные процедуры для инициализации three.js 
+
+
+          //Здесь стандартные процедуры для инициализации three.js
           renderer = new THREE.WebGLRenderer({antialias: true});
-          
+
           // Размер канваса, в котором рендерится сцена
           renderer.setSize(2560, 1440);
           // renderer.setSize(1366, 768);
@@ -70,11 +70,11 @@
           renderer.shadowMap.enabled = false;
           renderer.shadowMapSoft = false;
           document.getElementById('viewport').appendChild(renderer.domElement);
-          
+
           scene = new Physijs.Scene;
           scene.background = 'black';
-          
-          // Гравитация на сцене. -500 - значение по оси Y. Чем меньше значение - тем сильнее гравитация. 
+
+          // Гравитация на сцене. -500 - значение по оси Y. Чем меньше значение - тем сильнее гравитация.
           // Значение подобрано оптимальное. Его изменение может вызывать проскакивание шаров сквозь барабан при падении
           scene.setGravity(new THREE.Vector3(0, -500, 0));
           scene.addEventListener(
@@ -92,14 +92,14 @@
               1,
               1000
           );
-          
-          // Значение 625 - удаленность камеры от начала координат по оси Z. Это значение нужно уменьшить, если 
+
+          // Значение 625 - удаленность камеры от начала координат по оси Z. Это значение нужно уменьшить, если
           // необходимо все приблизить
           camera.position.set(0, 20, 625);
           camera.lookAt({x: 0, y: 20, Z: 0});
           scene.add(camera);
-          
-          
+
+
           // Если раскоментировать эту строку, появится возможность управлять камерой с помощью мыши. Удобно для отладки
           // Если убрать прозрачность у объектов, то можно увидеть общую структуру сцены: все сделано примитивными фигурами
           // Они находятся друг позади друга,таким образом, с определенного ракурса создается впечатление единства всех объектов
@@ -108,10 +108,10 @@
           // Light
           var ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.9); // soft white light (мягкий белый свет)
           scene.add(ambientLight);
-          
+
           // Loader
           loader = new THREE.TextureLoader();
-          
+
           // Массив с шарами, которые создаются при первом запуске
           // var balls = [
           //     [
@@ -318,7 +318,7 @@
               //     ]
               // ];
           }
-          
+
           // Массив с перегородками, которые не дают падать шарам в трубах
           var stoppers = [
               makeStopper(-15),
@@ -375,19 +375,19 @@
           ];
 
 
-          
+
           // Вращающийся барабан
           let container = makeContainer();
 
           // Стенка с бэкграундом позади всех объектов
           makeSceneBg();
-          
+
           // Объекты с текстурами автомата
           makeGlass();
-          
+
           // Трубы сверху, удерживающие шары
           makeTubes();
-          
+
           // Трубка снизу, в которую выкатывается выирышный шар
           makeBallsExit();
 
@@ -396,33 +396,33 @@
 
           // Верхняя стенка цилиндра. Удаляется и снова добавляется, чтобы шары могли упасть в барабан и не вываливаться из него
           var topWall = makeTopWall();
-          
+
           // Всего 4 итерации (по количеству трубок с шарами)
           var iteration = 0;
-          
+
           // Порядковый номер шара. Используется в функциях добавления / удаления шаров на сцену / со сцены
           let ballNum = 0;
-          
+
           // Массив с выигрышными номерами шаров
           let winningBallsPull = [];
-          
+
           // Скорость вращения барабана
           let speed = 0;
-          
+
           // Добавление первого массива шаров в трубки
           balls.forEach((item => {
               item.forEach((ball => {
                   scene.add(ball);
               }))
           }));
-          
+
           // Функция добавления шаров на сцену
           function addBallsToScene() {
               for (let j = 0; j < 4; j++) {
                   scene.add(balls[j][ballNum])
               }
           };
-          
+
           // выбор рандомного видео
           // 30 - верхний предел выборки случайного числа. Это число нужно будет изменить на общее количество видео
           // var rand = Math.floor(1 + Math.random() * 30);
@@ -438,14 +438,14 @@
               scene.remove(ball);
               ball.position.z = -10;
               scene.add(ball);
-              
+
               setTimeout(()=> {
                   scene.remove(ball);
               }, 500);
           };
 
           let timeouts = [
-              1500, // время, через которое начинает вращаться барабан после НАЧАЛА падения шаров
+              2000, // время, через которое начинает вращаться барабан после НАЧАЛА падения шаров
               17500, // время, через которое выпадает выигрышный шар после НАЧАЛА падения шаров
               3000, // время, через которое в трубках появляются новые шары после НАЧАЛА удаления выигрышных шаров
               4000, // время, через которое начинается новый раунд после НАЧАЛА добавления новых шаров в трубки
@@ -508,7 +508,7 @@
                   additioanlWalls.forEach((item) => {
                       scene.remove(item);
                   });
-                  
+
                   // корректируется гравитация.
                   scene.setGravity(new THREE.Vector3(0, -400, 0));
 
@@ -534,7 +534,7 @@
               setTimeout(() => {
                   // определяется выигрышный шар для этого раунда, этой итерации
                   let winningBall = winningBalls[iteration];
-                  
+
                   // изменяется положение шара в пространстве, чтобы перенести его в нижнюю трубку
                   scene.remove(balls[iteration][winningBall]);
                   balls[iteration][winningBall].position.z = 48;
@@ -550,38 +550,38 @@
                   let img = document.createElement('img');
                   img.src = `assets/balls/balls/Ball_${winningBall}.png`;
                   ballCont.appendChild(img);
-                  
+
                   // выигрышный шар удаляется из массива со всеми шарами, чтобы можно было без проблем потом удалить остальные
                   var index = balls[iteration].indexOf(balls[iteration][winningBall]);
                   if (index !== -1) balls[iteration].splice(index, 1);
-                  
+
                   // Через 0.5 сек вращение барабана начинает замедляться
                   setTimeout(() => {
                       // Каждые 0.5 сек удаляется один невыигрышный шар
                       var timerB = setInterval(() => {
-                          
+
                           // Когда все шары удалятся, запускается эта часть
                           if (balls[iteration].length === 0) {
                               clearInterval(timerB);
-                              
+
                               // Каждые 0.2 сек проверяется положение барабана
                               let timer = setInterval(() => {
-                                  
+
                                   // Вращение барабана замедляется
                                   if (speed > 0.06) {
                                       speed -= 0.05;
                                   }
-                                  
+
                                   // Барабан вертится с небольной скоростью, пока его верхняя стенка, которая
                                   // должна удаляться, не будет смотреть вверх
                                   if (container.rotation.z <= 0.3 && container.rotation.z >= -0.3) {
                                       // Как только барабан в нужном положении, полностью останавливаем его
                                       speed = 0;
                                       container.rotation.z = 0;
-                                      
+
                                       // прекращаем проверку положения барабана
                                       clearInterval(timer);
-                                      
+
                                       // Если количество итераций достигло 4, выполнение функции прекращается,
                                       // ожидается нажатие кнопки старт для начала следующего раунда
                                       if (iteration < 4) {
@@ -608,7 +608,7 @@
                                                   document.body.querySelectorAll('.win').forEach(item => {
                                                       item.innerHTML = '';
                                                   });
-                                                  
+
                                                   // Выигрышные числа переносятся в таблицы по бокам
                                                   let winStr = `${winningBalls[0]} ${winningBalls[1]} ${winningBalls[2]} ${winningBalls[3]}`;
                                                   document.body.querySelectorAll(`.round-${round}`).forEach(item => {
@@ -631,10 +631,10 @@
                                                       }
                                                   }, 500);
                                               }, 500);
-                                              
+
                                               // через 3 секунды сцена подготавливается к новому раунду
                                               setTimeout(() => {
-                                                  
+
                                                   // На сцену добавляются стопперы в трубки, чтобы шары не падали в барабан
                                                   stoppers.forEach((item) => {
                                                       scene.add(item);
@@ -645,7 +645,7 @@
                                                           scene.add(it);
                                                       });
                                                   });
-                                                  
+
                                                   // В трубки добавляются новые шары каждые 0.25сек
                                                   balls = ballPull();
                                                   let int = setInterval(() => {
@@ -658,7 +658,7 @@
                                                   }, 250);
                                                   // обнуляется счетчик итераций для нового раунда
                                                   iteration = 0;
-                                                  
+
                                                   // через 4 сек запускается новый раунд
                                                   setTimeout(() => {
                                                       startGame();
@@ -690,10 +690,10 @@
                   }, 500)
               }, timeouts[1])
           };
-          
+
           // Запуск раунда по нажатию кнопки Start
           const startBtn = document.querySelector('.start_btn');
-          
+
           startBtn.addEventListener('click', () => {
               startGame();
               // //запуск видео через 5 сек после загрузки игры, чтобы все успело прогрузиться
@@ -708,7 +708,7 @@
               //     startGame();
               // });
           });
-          
+
           const fullscreenBtn = document.querySelector('.fullscreen_btn');
           const canvas = document.querySelector('.container');
 
@@ -726,7 +726,7 @@
           //         document.querySelector('.start_btn').click();
           //     }
           // });
-          
+
           // Обновление времени на табло вверху каждые 10 сек
 
         setDateAndTime(winningBallsAllRounds);
@@ -743,23 +743,23 @@
           // главная функция, без которой three js не работает.
           render = function () {
               requestAnimationFrame(render);
-              
+
               // Вращение барабана создается изменением значения rotation на величину speed
               container.rotation.z += speed;
               container.__dirtyRotation = true;
-              
+
               renderer.render(scene, camera);
           };
-          
+
           // То без чего three js и physi.js не работают. лучше не трогать
           scene.simulate();
           requestAnimationFrame(render);
       };
-      
+
       // Запуск всего, что описано выше при загрузке страницы
       window.onload = initScene;
-      
-      
+
+
       // Ниже описаны вспомогательные функции контрукторы, которые используются для создантия объектов и вызывются в initScene.
       // В них можно изменить физические размеры объектов, поменять их цвет, положение в пространстве.
       // Делать это я не рекомендую, т.к. все подогнано и будет больно все переделывать.
@@ -768,7 +768,7 @@
       // makeSceneBg() и makeGlass(), в которых создаются объекты с текстурами.
       // Во всех остальных допустимо менять только свойство opacity в конструктораз материалов. Так можно будет увидеть,
       // как реально выглядят и где находятся объекты.
-      
+
       // Функция, которая создает опоры для шаров в трубах
       // Все функции-конструкторы примерно одинаковые, поэтому подробно опишу толко эту. В остальных сделаю мелкие примечания
       function makeStopper(x) {
@@ -789,16 +789,16 @@
               ground_material,
               0, // mass
           );
-          
+
           // Настройки положения в пространстве
           stopper.rotation.x = Math.PI / 2;
           stopper.position.y = 57;
           stopper.position.z = 10;
           stopper.position.x = x;
-          
+
           // Так объект рендерится. Если не добавить его на сцену, он просто не отобразится
           scene.add(stopper);
-          
+
           return stopper;
       }
 
@@ -832,7 +832,7 @@
 
           return stopper;
       }
-      
+
       // Функция, которая создает коробку позади для ловли выпадающих шаров
       function makeCatchingBox() {
           var ground_material = Physijs.createMaterial(
@@ -859,11 +859,11 @@
               ground_material,
               0, // mass
           );
-          
+
           wall.position.y = -25;
           wall.position.z = -45;
           wall.rotation.x = Math.PI / 2;
-          
+
           var rightWall = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(50, 50, 1),
               ground_material,
@@ -874,7 +874,7 @@
           rightWall.position.x = -52;
           rightWall.position.z = -22;
           // floor.add()
-          
+
           var leftWall = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(50, 50, 1),
               ground_material,
@@ -884,7 +884,7 @@
           leftWall.rotation.y = Math.PI / 2;
           leftWall.position.x = 50;
           leftWall.position.z = -22;
-          
+
           // Многие объекты состоят из нескольких более простых объектов.
           // Как правило, из плоскостей и прямоугольнков
           // Чтобы объединить несколько примитивных объектов в сложный, нужно выбрать базовый объект
@@ -892,10 +892,10 @@
           floor.add(rightWall);
           floor.add(leftWall);
           floor.add(wall);
-          
+
           scene.add(floor);
       }
-      
+
       // Создает трубку снизу, куда выкатываются выигрышные шары
       function makeBallsExit() {
           var ground_material = Physijs.createMaterial(
@@ -907,7 +907,7 @@
               }),
               0.9,
               0);
-          
+
 
           var floor = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(50, 10, 1),
@@ -920,7 +920,7 @@
           floor.position.x = -20;
           floor.rotation.x = Math.PI / 2;
           floor.rotation.y = Math.PI / 30;
-          
+
           var frontWall = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(50, 10, 1),
               ground_material,
@@ -930,17 +930,17 @@
           frontWall.position.y = 5;
           frontWall.position.z = -5;
           frontWall.rotation.x = Math.PI / -2;
-          
+
           var backWall = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(50, 10, 1),
               ground_material,
               0 // mass
           );
-          
+
           backWall.position.z = -5;
           backWall.position.y = -5;
           backWall.rotation.x = Math.PI / -2;
-          
+
           var stopWall = new Physijs.BoxMesh(
               new THREE.PlaneGeometry(10, 10, 1),
               ground_material,
@@ -952,12 +952,12 @@
           stopWall.position.y = 0;
           stopWall.rotation.x = Math.PI / -2;
           stopWall.rotation.y = Math.PI / 2;
-          
-          
+
+
           floor.add(backWall);
           floor.add(frontWall);
           floor.add(stopWall);
-          
+
           scene.add(floor);
       }
 
@@ -1012,7 +1012,7 @@
               ground_material,
               0 // mass
           );
-          
+
           frontWallTube.position.y = 95;
           frontWallTube.position.z = 5;
 
@@ -1033,13 +1033,13 @@
           rightWallTube.position.x = 10;
           rightWallTube.position.z = 5;
           rightWallTube.rotation.y = Math.PI / 2;
-          
+
           var theMostRightWall = rightWallTube.clone();
           theMostRightWall.position.x = 20;
-          
+
           var theMostLeftWall = rightWallTube.clone();
           theMostLeftWall.position.x = -20;
-          
+
           var centerWallTube = rightWallTube.clone();
           centerWallTube.position.x = 0;
 
@@ -1055,7 +1055,7 @@
 
           scene.add(frontWallTube);
       }
-      
+
       // Верхняя стенка барабана, которая добавляется и удаляется, когда нужно всыпать шары в барабан
       function makeTopWall() {
           var ground_material = Physijs.createMaterial(
@@ -1067,7 +1067,7 @@
               }),
               0.4,
               0.8);
-          
+
           var topWall = new Physijs.BoxMesh(
               new THREE.BoxBufferGeometry(50, 40, 4),
               ground_material,
@@ -1086,7 +1086,7 @@
           smasherTop.position.z = 5;
           smasherTop.rotation.x = Math.PI / 2;
           topWall.add(smasherTop);
-          
+
           var leftCornerTop = new Physijs.BoxMesh(
               new THREE.BoxGeometry(45, 40, 4),
               ground_material,
@@ -1098,14 +1098,14 @@
           leftCornerTop.position.z = 15;
 
           topWall.add(leftCornerTop);
-          
+
           var rightCornerTop = leftCornerTop.clone();
           rightCornerTop.rotation.y = Math.PI / -4;
           rightCornerTop.position.x = 35;
           rightCornerTop.position.z = 15;
 
           topWall.add(rightCornerTop);
-          
+
           return topWall;
       }
 
@@ -1258,7 +1258,7 @@
           rightCornerTop.position.x = -35;
           rightCornerTop.position.y = 35;
           rightCornerTop.position.z = 20;
-          
+
           var smasherBottom = new Physijs.BoxMesh(
               new THREE.BoxBufferGeometry(10, 10, 40),
                   ground_material,
@@ -1360,7 +1360,7 @@
           image.addEventListener( 'load', function ( event ) {
               texture.needsUpdate = true;
           } );
-          
+
           // Создание материала
           var sideMaterial = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
@@ -1370,13 +1370,13 @@
               0.4,
               0.6, // Если сделать больше коэфициент упругости, шары могут вылетать за пределы барабана после падения. не рекомендую
           );
-          
+
           var materialArray = [];
- 
+
           for (let i = 0; i < 6; i++) {
               materialArray.push(sideMaterial);
           }
-          
+
           // Создание шара
           var ball = new Physijs.SphereMesh(geometry, sideMaterial, 5);
           ball.position.x = x;
@@ -1386,7 +1386,7 @@
 
           return ball;
       }
-      
+
       // Ниже находятся функции, в которых можно почти смело ковыряться и не бояться что-нибудь сломать
       // Создает объекты с тексутрами автомата
       function makeGlass() {
@@ -1404,7 +1404,7 @@
             material,
             0 // mass
         );
-        
+
         glass.position.z = 90; // также, размер можно регулировать, приближая и отдаляя объект от начала координат
         glass.position.y = 34;
 
@@ -1425,11 +1425,11 @@
         body.position.z = -5;
         body.position.y = 33;
         body.position.x = -2;
-        
+
         scene.add(glass);
         scene.add(body);
     }
-    
+
     // Функция обновляет время на табло сверху. Вызывается каждые 10 сек (интервал задается в initScene)
 
       function setDateAndTime(resp) {
@@ -1487,19 +1487,19 @@
 
           return `${year}-${month}-${day}`;
       }
-      
+
       // Функция делает запрос к апи, возвращает ответ
       async function getWinningBalls() {
           let clientID = 'star99';
           let apiPass = '0123456789';
           let date = updateTime();
           let validationHash = hex_md5(`${clientID}:${date}:${apiPass}`);
-          
+
           let requestString = `http://smartcar.temp.domains/~lotto/api/request.php?client_id=${clientID}&date=${date}&validation=${validationHash}`;
 
           return await fetch(`https://cors-anywhere.herokuapp.com/${requestString}`).then(resp => resp.json());
       }
-      
+
       // Объект с текстурой самой сцены.
       // Можно было бы бэкграунд установить глобально для всего канваса, но тогда, при приближении/отдаленни,
       // он бы никак не менялся.
@@ -1516,10 +1516,10 @@
               material,
               0 // mass
           );
-          
+
           bg.position.z = -100;
           bg.position.y = 20;
-          
+
           scene.add(bg);
       }
 
@@ -1582,7 +1582,7 @@
     <div class="win winning-1"></div>
     <div class="win winning-2"></div>
     <div class="win winning-3"></div>
-  
+
     <table class="score">
       <tr>
         <td></td>
@@ -1597,7 +1597,7 @@
         <td class="round-3"></td>
       </tr>
       <tr class="separator">
-    
+
       </tr>
       <tr>
         <td class="round-4"></td>
@@ -1620,7 +1620,7 @@
         <td class="round-13"></td>
       </tr>
       <tr class="separator-2">
-    
+
       </tr>
       <tr>
         <td class="round-14"></td>
@@ -1643,7 +1643,7 @@
         <td class="round-23"></td>
       </tr>
     </table>
-  
+
     <table class="score-2">
       <tr>
         <td></td>
@@ -1658,7 +1658,7 @@
         <td class="round-3"></td>
       </tr>
       <tr class="separator">
-    
+
       </tr>
       <tr>
         <td class="round-4"></td>
@@ -1681,7 +1681,7 @@
         <td class="round-13"></td>
       </tr>
       <tr class="separator-2">
-    
+
       </tr>
       <tr>
         <td class="round-14"></td>
@@ -1704,7 +1704,7 @@
         <td class="round-23"></td>
       </tr>
     </table>
-    
+
   </div>
 </div>
 
