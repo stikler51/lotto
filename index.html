@@ -1061,7 +1061,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'orange',
-                  opacity: 0,
+                  opacity: 1,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1112,8 +1112,8 @@
       function makeSmashers(x, y ,z) {
         var ground_material = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
-                  color: 'green',
-                  opacity: 0,
+                  color: 'red',
+                  opacity: 1,
                   transparent: true,
                   side: THREE.DoubleSide,
                 }),
@@ -1149,7 +1149,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'green',
-                  opacity: 0,
+                  opacity: 0.5,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1261,7 +1261,7 @@
           
           var smasherBottom = new Physijs.BoxMesh(
               new THREE.BoxBufferGeometry(10, 10, 40),
-              ground_material,
+              smasher_material,
               0 // mass
           );
 
