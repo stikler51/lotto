@@ -54,7 +54,7 @@
 //           alert( xhr.responseText ); // responseText -- текст ответа.
 //         }
 
-        await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`);
+        await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`).catch(error => console.error('Ошибка:', error));
 
           // await fetch(`http://95.217.73.101/?date=${dd}`);
 
