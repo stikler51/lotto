@@ -76,7 +76,7 @@
 
           // Гравитация на сцене. -500 - значение по оси Y. Чем меньше значение - тем сильнее гравитация.
           // Значение подобрано оптимальное. Его изменение может вызывать проскакивание шаров сквозь барабан при падении
-          scene.setGravity(new THREE.Vector3(0, -500, 0));
+          scene.setGravity(new THREE.Vector3(0, -300, 0));
           scene.addEventListener(
               'update',
               function () {
@@ -445,7 +445,7 @@
           };
 
           let timeouts = [
-              2000, // время, через которое начинает вращаться барабан после НАЧАЛА падения шаров
+              2500, // время, через которое начинает вращаться барабан после НАЧАЛА падения шаров
               17500, // время, через которое выпадает выигрышный шар после НАЧАЛА падения шаров
               3000, // время, через которое в трубках появляются новые шары после НАЧАЛА удаления выигрышных шаров
               4000, // время, через которое начинается новый раунд после НАЧАЛА добавления новых шаров в трубки
@@ -510,7 +510,7 @@
                   });
 
                   // корректируется гравитация.
-                  scene.setGravity(new THREE.Vector3(0, -400, 0));
+                  // scene.setGravity(new THREE.Vector3(0, -400, 0));
 
                   // Каждые 0.5 сек скорость вращения барабана увеличивается на 0,02
                   let timer = setInterval(() => {
@@ -520,13 +520,10 @@
                       }
                   }, 500);
 
-
-                setTimeout(() => {
-                  smashers.forEach((item) => {
-                    container.add(item);
-                    scene.add(container);
-                  });
-                }, 1000);
+                smashers.forEach((item) => {
+                  container.add(item);
+                  scene.add(container);
+                });
 
               }, timeouts[0]);
 
@@ -1061,7 +1058,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'orange',
-                  opacity: 0,
+                  opacity: 0.7,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1113,7 +1110,7 @@
         var ground_material = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
                   color: 'red',
-                  opacity: 0,
+                  opacity: 1,
                   transparent: true,
                   side: THREE.DoubleSide,
                 }),
@@ -1149,7 +1146,7 @@
           var ground_material = Physijs.createMaterial(
               new THREE.MeshBasicMaterial({
                   color: 'green',
-                  opacity: 0,
+                  opacity: 0.5,
                   transparent: true,
                   side: THREE.DoubleSide,
               }),
@@ -1261,7 +1258,7 @@
 
           var smasherBottom = new Physijs.BoxMesh(
               new THREE.BoxBufferGeometry(10, 10, 40),
-                  ground_material,
+                  smasher_material,
               0 // mass
           );
 
