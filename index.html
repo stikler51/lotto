@@ -573,8 +573,14 @@
                                   // должна удаляться, не будет смотреть вверх
                                   if (container.rotation.z <= 0.3 && container.rotation.z >= -0.3) {
                                       // Как только барабан в нужном положении, полностью останавливаем его
-                                      speed = 0;
+
+                                    container.rotation.z = 0;
+                                    speed = 0;
+
+                                    setTimeout(() => {
                                       container.rotation.z = 0;
+                                      speed = 0;
+                                    }, 200);
 
                                       // прекращаем проверку положения барабана
                                       clearInterval(timer);
