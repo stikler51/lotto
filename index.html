@@ -1436,29 +1436,30 @@
     // Функция обновляет время на табло сверху. Вызывается каждые 10 сек (интервал задается в initScene)
 
       function setDateAndTime(resp) {
-        let gameDate = resp.date;
-        let temp = gameDate.split('-');
+        // let gameDate = resp.date;
+        // let temp = gameDate.split('-');
         let dataContainer = document.body.querySelector('.date');
+        dataContainer.innerHTML = 'www.Star99.tv';
 
-        let gameTime = resp.time;
-        let tempTime = gameTime.split(':');
+        // let gameTime = resp.time;
+        // let tempTime = gameTime.split(':');
+        //
+        // var ampm = +tempTime[0] >= 12 ? 'PM' : 'AM';
+        //
+        // let outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${tempTime[1]} ${ampm}`;
+        // dataContainer.innerHTML = outputDate;
+        //
+        // let minutes = +tempTime[1];
 
-        var ampm = +tempTime[0] >= 12 ? 'PM' : 'AM';
-
-        let outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${tempTime[1]} ${ampm}`;
-        dataContainer.innerHTML = outputDate;
-
-        let minutes = +tempTime[1];
-
-        setTimeout(() => {
-          setInterval(() => {
-            minutes++ ;
-            minutes = minutes < 10 ? '0'+minutes : minutes;
-
-            outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${minutes} ${ampm}`;
-            dataContainer.innerHTML = outputDate;
-          }, 93500)
-        }, 19000)
+        // setTimeout(() => {
+        //   setInterval(() => {
+        //     minutes++ ;
+        //     minutes = minutes < 10 ? '0'+minutes : minutes;
+        //
+        //     outputDate = `${temp[2]}-${temp[1]}-${temp[0]}   ${tempTime[0]}<span class='dots'>:</span>${minutes} ${ampm}`;
+        //     dataContainer.innerHTML = outputDate;
+        //   }, 93500)
+        // }, 19000)
 
       }
 
