@@ -34,7 +34,7 @@
           // Для проверки выводим этот объект в консоль
           console.log(winningBallsAllRounds);
           let dd = winningBallsAllRounds.date;
-          console.log(dd);
+          // console.log(dd);
 
 // 1. Создаём новый объект XMLHttpRequest
 //         var xhr = new XMLHttpRequest();
@@ -54,7 +54,7 @@
 //           alert( xhr.responseText ); // responseText -- текст ответа.
 //         }
 
-        await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`).catch(error => console.error('Ошибка:', error));
+        // await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`).catch(error => console.error('Ошибка:', error));
 
           // await fetch(`http://95.217.73.101/?date=${dd}`);
 
@@ -1496,12 +1496,14 @@
       async function getWinningBalls() {
           let clientID = 'star99';
           let apiPass = '0123456789';
-          let date = updateTime();
-          let validationHash = hex_md5(`${clientID}:${date}:${apiPass}`);
+          // let date = updateTime();
+          let validationHash = hex_md5(`${clientID}:${apiPass}`);
+          console.log(validationHash);
 
-          let requestString = `http://smartcar.temp.domains/~lotto/api/request.php?client_id=${clientID}&date=${date}&validation=${validationHash}`;
+          let requestString = `http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`;
 
           return await fetch(`https://cors-anywhere.herokuapp.com/${requestString}`).then(resp => resp.json());
+          // return await fetch(`http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`).then(resp => resp.json());
       }
 
       // Объект с текстурой самой сцены.
