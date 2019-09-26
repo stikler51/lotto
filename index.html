@@ -33,8 +33,8 @@
 
           // Для проверки выводим этот объект в консоль
           console.log(winningBallsAllRounds);
-          let dd = winningBallsAllRounds.date;
-          // console.log(dd);
+          let fileName = `${winningBallsAllRounds[23]}-${winningBallsAllRounds[22]}-${winningBallsAllRounds[21]}`;
+          console.log(fileName);
 
 // 1. Создаём новый объект XMLHttpRequest
 //         var xhr = new XMLHttpRequest();
@@ -54,9 +54,9 @@
 //           alert( xhr.responseText ); // responseText -- текст ответа.
 //         }
 
-        // await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${dd}`).catch(error => console.error('Ошибка:', error));
+        await fetch(`https://cors-anywhere.herokuapp.com/http://95.217.73.101/?date=${fileName}`).catch(error => console.error('Ошибка:', error));
 
-          // await fetch(`http://95.217.73.101/?date=${dd}`);
+          // await fetch(`http://95.217.73.101/?name=${fileName}`);
 
 
           //Здесь стандартные процедуры для инициализации three.js
@@ -1503,7 +1503,7 @@
           let requestString = `http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`;
 
           return await fetch(`https://cors-anywhere.herokuapp.com/${requestString}`).then(resp => resp.json());
-          // return await fetch(`http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`).then(resp => resp.json());
+          // return await fetch(`${requestString}`).then(resp => resp.json());
       }
 
       // Объект с текстурой самой сцены.
