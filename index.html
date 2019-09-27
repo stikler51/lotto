@@ -1494,13 +1494,15 @@
 
       // Функция делает запрос к апи, возвращает ответ
       async function getWinningBalls() {
-          let clientID = 'star99';
-          let apiPass = '0123456789';
+          // let clientID = 'star99';
+          // let apiPass = '0123456789';
           // let date = updateTime();
-          let validationHash = hex_md5(`${clientID}:${apiPass}`);
+          // let validationHash = hex_md5(`${clientID}:${apiPass}`);
           // console.log(validationHash);
 
-          let requestString = `http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`;
+          // let requestString = `http://116.203.212.197/api/request.php?client_id=${clientID}&validation=${validationHash}`;
+          let requestString = 'http://116.203.212.197/api/request.php?client_id=star99&validation=2666ffc156916575c910bc4c087d5e0e';
+          // console.log(requestString);
 
           return await fetch(`https://cors-anywhere.herokuapp.com/${requestString}`).then(resp => resp.json());
           // return await fetch(`${requestString}`).then(resp => resp.json());
